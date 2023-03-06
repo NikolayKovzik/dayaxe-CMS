@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import "./navbar.scss";
+import styles from "./style.module.scss";
 import { NavBarProps } from "./models/index";
 
 function NavBar({ items }: NavBarProps) {
   return (
     <nav className="navbar">
-      <ul className="navbar__menu-list">
+      <ul className="menu-list">
         {items.map((item) => {
           return (
-            <li className="navbar__menu-item" key={item.link}>
+            <li className="menu-item" key={item.link}>
               <NavLink
                 to={item.link}
-                className="navbar__menu-link"
+                className="menu-link"
               >
                 {item.content}
               </NavLink>

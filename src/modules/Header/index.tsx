@@ -1,10 +1,10 @@
 import React from "react";
-import "./styles/header.scss";
+import styles from "./styles/style.module.scss";
 
 
 function Header() {
   return (
-    <header className="header">
+    <header className={styles.header}>
       Header
     </header>
   );
