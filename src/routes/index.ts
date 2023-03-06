@@ -1,9 +1,10 @@
 enum RoutesList {
   DEFAULT = "/",
-  CMS_HISTORY = "/history",
-  CONFIGURATION = "/configuration",
-  TEXTS = "/texts",
-  ADMNISTRATOR_PROFILE = "/adminprofile",
+  USERS = "/users",
+  DAYCATION = "/daycation",
+  HOTEL_PASSES = "/hotel-passes",
+  PROMOTIONS = "/promotions",
+  MOMENTS = "/moments",
   NOT_FOUND = "*",
 }
 

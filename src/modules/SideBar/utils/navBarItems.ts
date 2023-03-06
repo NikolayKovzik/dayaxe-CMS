@@ -2,20 +2,24 @@ import RoutesList from "../../../routes";
 
 const navBaritems = [
   {
-    link: RoutesList.ADMNISTRATOR_PROFILE,
-    content: "Administrator profile",
+    link: RoutesList.USERS,
+    content: "Users",
   },
   {
-    link: RoutesList.CMS_HISTORY,
-    content: "CMS History",
+    link: RoutesList.MOMENTS,
+    content: "Moments",
   },
   {
-    link: RoutesList.CONFIGURATION,
-    content: "Configuration",
+    link: RoutesList.DAYCATION,
+    content: "Daycation",
   },
   {
-    link: RoutesList.TEXTS,
-    content: "Texts",
+    link: RoutesList.HOTEL_PASSES,
+    content: "Hotel Passes",
+  },
+  {
+    link: RoutesList.PROMOTIONS,
+    content: "Promotions",
   },
 ];
 

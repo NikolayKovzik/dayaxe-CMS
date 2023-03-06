@@ -7,10 +7,11 @@ import RoutesList from './routes';
 import Layout from './pages/Layout';
 import NotFoundPage from './pages/NotFoundPage';
 import HomePage from './pages/HomePage';
-import CMSHistory from './pages/CMSHistory';
-import Configuration from './pages/Configuration';
-import Texts from './pages/Texts';
-import AdminProfile from './pages/AdminProfile';
+import Daycation from './pages/Daycation';
+import Moments from './pages/Moments';
+import HotelPasses from './pages/HotelPasses';
+import Promotions from './pages/Promotions';
+import Users from './pages/Users';
 
 function App() {
   return (
@@ -18,10 +19,11 @@ function App() {
       <Routes>
         <Route path={RoutesList.DEFAULT} element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path={RoutesList.CMS_HISTORY} element={<CMSHistory />} />
-          <Route path={RoutesList.CONFIGURATION} element={<Configuration />} />
-          <Route path={RoutesList.TEXTS} element={<Texts />} />
-          <Route path={RoutesList.ADMNISTRATOR_PROFILE} element={<AdminProfile />} />
+          <Route path={RoutesList.USERS} element={<Users />} />
+          <Route path={RoutesList.DAYCATION} element={<Daycation />} />
+          <Route path={RoutesList.HOTEL_PASSES} element={<HotelPasses />} />
+          <Route path={RoutesList.PROMOTIONS} element={<Promotions />} />
+          <Route path={RoutesList.MOMENTS} element={<Moments />} />
         </Route>
         <Route path={RoutesList.NOT_FOUND} element={<NotFoundPage />} />
       </Routes>
