@@ -1,0 +1,75 @@
+@use "../styles/mixins/breakpoints.scss" as bp;
+
+* {
+  font-family: "Gilroy";
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-weight: 400;
+}
+
+a,
+a:hover,
+a:active,
+a:visited,
+a:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  // display: block;
+  padding: 0px;
+  border: none;
+
+  cursor: pointer;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+
+  &--stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+.container {
+  max-width: 1128px; // 1440 minus paddings
+  margin: 0 auto;
+
+  padding-right: 24px;
+  padding-left: 24px;
+
+  @include bp.tablet {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+
+  @include bp.laptop {
+    padding-right: 156px;
+    padding-left: 156px;
+  }
+}

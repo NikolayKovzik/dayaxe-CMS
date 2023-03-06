@@ -1,0 +1,14 @@
+@use "../../styles/utils/variables.scss" as var;
+
+.admin-profile {
+  background-color: var.$admin-profile-bg;
+  height: 100vh;
+  width: 70vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 56px;
+  font-weight: bold;
+}

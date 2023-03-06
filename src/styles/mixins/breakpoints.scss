@@ -1,0 +1,31 @@
+@use "../utils/variables.scss" as var;
+
+@mixin mobile-s {
+  @media (min-width: #{var.$screen-mobile-s}) {
+      @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{var.$screen-tablet}) {
+      @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: #{var.$screen-laptop}) {
+      @content;
+  }
+}
+
+@mixin laptop-l {
+  @media (min-width: #{var.$screen-laptop-l}) {
+      @content;
+  }
+}
+
+@mixin screen-min-width($screen) {
+  @media (min-width: $screen) {
+      @content;
+  }
+}

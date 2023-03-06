@@ -1,0 +1,14 @@
+@use "../../styles/utils/variables.scss" as var;
+
+.not-found-page {
+  background-color: var.$not-found-bg;
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 56px;
+  font-weight: bold;
+}
