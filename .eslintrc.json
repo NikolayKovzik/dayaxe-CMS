@@ -23,6 +23,7 @@
         "prettier"
     ],
     "rules": {
-        "no-duplicate-imports": "error"
+        "no-duplicate-imports": "error",
+        "react/display-name": ""
     }
 }

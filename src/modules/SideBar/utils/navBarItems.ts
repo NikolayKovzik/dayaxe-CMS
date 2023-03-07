@@ -1,26 +1,26 @@
-import RoutesList from "../../../routes";
+import RoutesList from '../../../routes';
 
-const navBaritems = [
+const navBarItems = [
   {
     link: RoutesList.USERS,
-    content: "Users",
+    content: 'Users',
   },
   {
     link: RoutesList.MOMENTS,
-    content: "Moments",
+    content: 'Moments',
   },
   {
     link: RoutesList.DAYCATION,
-    content: "Daycation",
+    content: 'Daycation',
   },
   {
     link: RoutesList.HOTEL_PASSES,
-    content: "Hotel Passes",
+    content: 'Hotel Passes',
   },
   {
     link: RoutesList.PROMOTIONS,
-    content: "Promotions",
+    content: 'Promotions',
   },
 ];
 
-export default navBaritems;
+export default navBarItems;

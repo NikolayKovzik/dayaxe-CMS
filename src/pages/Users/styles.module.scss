@@ -1,6 +1,8 @@
 @use "../../styles/utils/variables.scss" as var;
 
 .users {
-  font-size: 56px;
-  font-weight: bold;
+}
+
+.addUserButton {
+  width: 30%;
 }
