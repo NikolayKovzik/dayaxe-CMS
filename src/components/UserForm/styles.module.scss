@@ -2,23 +2,7 @@
 @import '../../styles/utils/variables';
 
 .form {
-  display: block;
   width: 100%;
-  padding: 2.5em 1.5em;
-  background-color: $white;
-  border-radius: 40px 10px 40px 10px;
-  box-shadow: 0 0 16px $shadow;
-
-  @include bp.screen-m {
-    width: 600px;
-    padding: 4.5em 3.5em;
-  }
-}
-
-.resolveBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .button {

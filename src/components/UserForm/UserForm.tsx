@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
 import styles from './styles.module.scss';
 import usePasswordVisibility from '../../hooks/usePasswordVisibility';
@@ -6,14 +6,13 @@ import validation from '../../constants/user-validation';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 import Eye from '../../UI/Eye';
+import { UserFormItems } from './models';
 
-interface FormItems {
-  username: string;
-  password: string;
-  email: string;
+interface Props {
+  submitData: (data: UserFormItems) => void;
 }
 
-const UserForm = () => {
+const UserForm = ({ submitData }: Props) => {
   const { username, password, email } = validation;
   const { isVisible, toggle } = usePasswordVisibility();
 
@@ -22,15 +21,11 @@ const UserForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormItems>({ mode: 'all' });
+  } = useForm<UserFormItems>({ mode: 'all' });
 
-  const onSubmit: SubmitHandler<FormItems> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<UserFormItems> = (data) => {
+    submitData(data);
     reset();
-  };
-
-  const handleCancel = () => {
-    console.log('cancel');
   };
 
   return (

@@ -5,6 +5,7 @@ import Button from '../../UI/Button';
 import useModal from '../../hooks/useModal';
 import Modal from '../../components/Modal';
 import UserCards from '../../components/UserCards';
+import AddUserForm from '../../components/AddUserForm';
 
 const Users = () => {
   const { isShown, toggle } = useModal();
@@ -16,7 +17,7 @@ const Users = () => {
           Add New User
         </Button>
       </div>
-      <Modal isShown={isShown} hide={toggle} modalContent={<UserForm />} />
+      <Modal isShown={isShown} hide={toggle} modalContent={<AddUserForm close={toggle} />} />
       <UserCards />
     </div>
   );
