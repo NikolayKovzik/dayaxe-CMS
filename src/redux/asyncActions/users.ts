@@ -23,8 +23,12 @@ export const getUserById = createAsyncThunk<User, string, { rejectValue: string 
   async (id, { rejectWithValue }) => {
     const { data, status } = await UserService.getUserById(id);
 
+    if (status === 400) {
+      return rejectWithValue('Bad Request');
+    }
+
     if (status !== 200) {
-      return rejectWithValue('Server error!');
+      return rejectWithValue('Server Error');
     }
 
     return data;
@@ -36,8 +40,12 @@ export const createUser = createAsyncThunk<void, CreateUser, { rejectValue: stri
   async (body, { rejectWithValue, dispatch }) => {
     const { data, status } = await UserService.createUser(body);
 
+    if (status === 400) {
+      return rejectWithValue('Bad Request');
+    }
+
     if (status !== 201) {
-      return rejectWithValue('Server error!');
+      return rejectWithValue('Server Error');
     }
 
     dispatch(usersActions.addUser(data));
@@ -50,8 +58,12 @@ export const updateUser = createAsyncThunk<void, UserAttributes, { rejectValue: 
     const { id, ...body } = user;
     const { data, status } = await UserService.updateUser(id, body);
 
+    if (status === 400) {
+      return rejectWithValue('Bad Request');
+    }
+
     if (status !== 200) {
-      return rejectWithValue('Server error!');
+      return rejectWithValue('Server Error');
     }
 
     dispatch(usersActions.updateUser(data));
@@ -63,8 +75,12 @@ export const deleteUser = createAsyncThunk<void, string, { rejectValue: string }
   async (id, { rejectWithValue, dispatch }) => {
     const { data, status } = await UserService.deleteUser(id);
 
+    if (status === 400) {
+      return rejectWithValue('Bad Request');
+    }
+
     if (status !== 200) {
-      return rejectWithValue('Server error!');
+      return rejectWithValue('Server Error');
     }
 
     dispatch(usersActions.deleteUser(id));

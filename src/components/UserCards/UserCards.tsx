@@ -1,12 +1,13 @@
 import React, { useEffect, useMemo } from 'react';
 import styles from './styles.module.scss';
+import UserCard from '../UserCard';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectUsers } from '../../redux/store/selectors';
-import UserCard from '../UserCard';
 import { getAllUsers } from '../../redux/asyncActions/users';
+import Loader from '../../UI/Loader';
 
 const UserCards = () => {
-  const { users, loading, error } = useAppSelector(selectUsers);
+  const { users, loading } = useAppSelector(selectUsers);
   const dispatch = useAppDispatch();
 
   const userCards = useMemo(
@@ -20,8 +21,7 @@ const UserCards = () => {
 
   return (
     <>
-      {loading && <h2>Loading...</h2>}
-      {error && <h2>{error}</h2>}
+      {loading && <Loader />}
       <ul className={styles.cards}>{userCards}</ul>
     </>
   );
