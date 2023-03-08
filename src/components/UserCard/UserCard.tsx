@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 import Button from '../../UI/Button';
 import EditUserForm from '../EditUserForm';
 import styles from './styles.module.scss';
-import { User } from '../../redux/slices/users';
+import { User } from '../../models/User/User';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { deleteUser } from '../../redux/asyncActions/users';
+import { selectUsers } from '../../redux/store/selectors';
 
 const UserCard = (user: User) => {
+  const { users, loading, error } = useAppSelector(selectUsers);
   const [isEditable, setIsEditable] = useState(false);
+  const dispatch = useAppDispatch();
 
-  const deleteUser = (id: string) => {
-    console.log(id);
+  const removeUser = (id: string) => {
+    dispatch(deleteUser(id));
   };
 
   return (
@@ -31,7 +36,7 @@ const UserCard = (user: User) => {
                 Edit
               </Button>
             </div>
-            <div onClick={() => deleteUser(user._id)} className={styles.button}>
+            <div onClick={() => removeUser(user._id)} className={styles.button}>
               <Button inverted={true} padding={'8px 15px'}>
                 Delete
               </Button>

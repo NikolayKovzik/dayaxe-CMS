@@ -3,6 +3,9 @@ import UserForm from '../UserForm';
 import styles from './styles.module.scss';
 import { UserFormItems } from '../UserForm/models';
 import icons from '../../assets/icons.svg';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { selectUsers } from '../../redux/store/selectors';
+import { updateUser } from '../../redux/asyncActions/users';
 
 interface Props {
   close: () => void;
@@ -10,14 +13,17 @@ interface Props {
 }
 
 const EditUserForm = ({ close, userId }: Props) => {
-  const updateUser = (data: UserFormItems) => {
-    console.log(userId);
-    console.log(data);
+  const { loading, error } = useAppSelector(selectUsers);
+  const dispatch = useAppDispatch();
+
+  const editUser = (data: UserFormItems) => {
+    dispatch(updateUser({ id: userId, ...data }));
+    close();
   };
 
   return (
     <div className={styles.formWrapper}>
-      <UserForm submitData={updateUser} />
+      <UserForm submitData={editUser} />
       <svg className={styles.closeButton} onClick={close}>
         <use xlinkHref={`${icons}#cross`} />
       </svg>

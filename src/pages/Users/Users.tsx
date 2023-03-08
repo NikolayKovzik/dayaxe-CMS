@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import UserForm from '../../components/UserForm';
 import Button from '../../UI/Button';
 import useModal from '../../hooks/useModal';
 import Modal from '../../components/Modal';
