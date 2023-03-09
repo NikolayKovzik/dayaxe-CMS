@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { deleteUser } from '../../redux/asyncActions/users';
 import { selectUsers } from '../../redux/store/selectors';
 import Loader from '../../UI/Loader';
+import { Access, AccessType } from '../../models/User/UserDto';
 
 const UserCard = (user: User) => {
   const [isEditable, setIsEditable] = useState(false);
@@ -23,12 +24,31 @@ const UserCard = (user: User) => {
       ) : (
         <div className={styles.cardContent}>
           <div className={styles.fields}>
-            {Object.entries(user).map(([key, value]) => (
-              <div key={key} className={styles.cardItem}>
-                <span className={styles.itemKey}>{key}:</span>
-                <span className={styles.itemValue}>{value}</span>
-              </div>
-            ))}
+            {Object.entries(user).map(([key, value]: [key: string, value: Access | string]) => {
+              const isValueObject = typeof value === 'object' && value !== null;
+
+              if (isValueObject) {
+                return Object.entries(value).map(([key, value]) => {
+                  if (key === '_id') {
+                    return null;
+                  }
+
+                  return (
+                    <div key={key} className={styles.cardItem}>
+                      <span className={styles.itemKey}>{key}:</span>
+                      <span className={styles.itemValue}>{value.join(', ')}</span>
+                    </div>
+                  );
+                });
+              } else {
+                return (
+                  <div key={key} className={styles.cardItem}>
+                    <span className={styles.itemKey}>{key}:</span>
+                    <span className={styles.itemValue}>{value}</span>
+                  </div>
+                );
+              }
+            })}
           </div>
           <div className={styles.buttons}>
             <div onClick={() => setIsEditable(true)} className={styles.button}>

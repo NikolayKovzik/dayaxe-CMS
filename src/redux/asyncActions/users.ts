@@ -4,85 +4,72 @@ import UserService from '../../http/services/UserService';
 import { UserDto } from '../../models/User/UserDto';
 import { UserAttributes } from '../../models/User/UserAttributes';
 import { usersActions } from '../slices/users';
+import { AxiosError } from 'axios';
+import decodeErrorMessage from '../../utils/decodeErrorMessage';
 
 export const getAllUsers = createAsyncThunk<User[], void, { rejectValue: string }>(
   'users/getAllUsers',
   async (_, { rejectWithValue }) => {
-    const { data, status } = await UserService.getAllUsers();
-
-    if (status !== 200) {
-      return rejectWithValue('Server error!');
+    try {
+      const { data } = await UserService.getAllUsers();
+      return data;
+    } catch (error) {
+      const message = (error as AxiosError).message;
+      return rejectWithValue(decodeErrorMessage(message));
     }
-
-    return data;
   },
 );
 
 export const getUserById = createAsyncThunk<User, string, { rejectValue: string }>(
   'users/getUserById',
   async (id, { rejectWithValue }) => {
-    const { data, status } = await UserService.getUserById(id);
-
-    if (status === 400) {
-      return rejectWithValue('Bad Request');
+    try {
+      const { data } = await UserService.getUserById(id);
+      return data;
+    } catch (error) {
+      const message = (error as AxiosError).message;
+      return rejectWithValue(decodeErrorMessage(message));
     }
-
-    if (status !== 200) {
-      return rejectWithValue('Server Error');
-    }
-
-    return data;
   },
 );
 
 export const createUser = createAsyncThunk<void, UserDto, { rejectValue: string }>(
   'users/createUser',
   async (body, { rejectWithValue, dispatch }) => {
-    const { data, status } = await UserService.createUser(body);
-
-    if (status === 400) {
-      return rejectWithValue('Bad Request');
+    try {
+      const { data } = await UserService.createUser(body);
+      dispatch(usersActions.addUser(data));
+    } catch (error) {
+      const message = (error as AxiosError).message;
+      return rejectWithValue(decodeErrorMessage(message));
     }
-
-    if (status !== 201) {
-      return rejectWithValue('Server Error');
-    }
-
-    dispatch(usersActions.addUser(data));
   },
 );
 
 export const updateUser = createAsyncThunk<void, UserAttributes, { rejectValue: string }>(
   'users/updateUser',
   async (user, { rejectWithValue, dispatch }) => {
-    const { id, ...body } = user;
-    const { data, status } = await UserService.updateUser(id, body);
+    try {
+      const { id, ...body } = user;
+      const { data } = await UserService.updateUser(id, body);
 
-    if (status === 400) {
-      return rejectWithValue('Bad Request');
+      dispatch(usersActions.updateUser(data));
+    } catch (error) {
+      const message = (error as AxiosError).message;
+      return rejectWithValue(decodeErrorMessage(message));
     }
-
-    if (status !== 200) {
-      return rejectWithValue('Server Error');
-    }
-
-    dispatch(usersActions.updateUser(data));
   },
 );
 
 export const deleteUser = createAsyncThunk<void, string, { rejectValue: string }>(
   'users/deleteUser',
   async (id, { rejectWithValue, dispatch }) => {
-    const { data, status } = await UserService.deleteUser(id);
-
-    if (status === 400) {
-      return rejectWithValue('Bad Request');
+    try {
+      await UserService.deleteUser(id);
+      dispatch(usersActions.deleteUser(id));
+    } catch (error) {
+      const message = (error as AxiosError).message;
+      return rejectWithValue(decodeErrorMessage(message));
     }
-
-    if (status !== 200) {
-      return rejectWithValue('Server Error');
-    }
-
-    dispatch(usersActions.deleteUser(id));
   },
 );
