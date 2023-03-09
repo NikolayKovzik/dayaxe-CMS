@@ -1,32 +1,53 @@
 import React from 'react';
 import { SubmitHandler, useForm, Controller } from 'react-hook-form';
-import styles from './styles.module.scss';
-import usePasswordVisibility from '../../hooks/usePasswordVisibility';
-import validation from '../../constants/user-validation';
 import Input from '../../UI/Input';
 import Button from '../../UI/Button';
 import Eye from '../../UI/Eye';
-import { UserFormItems } from './models';
+import SectionCheckboxes from '../SectionCheckboxes';
+import styles from './styles.module.scss';
+import usePasswordVisibility from '../../hooks/usePasswordVisibility';
+import validation from '../../constants/user-validation';
+import { Access, Modules, UserDto } from '../../models/User/UserDto';
 
 interface Props {
-  submitData: (data: UserFormItems) => void;
+  submitData: (data: UserDto) => void;
 }
 
 const UserForm = ({ submitData }: Props) => {
   const { username, password, email } = validation;
   const { isVisible, toggle } = usePasswordVisibility();
 
+  const accessDefaultValues = Object.values(Modules).reduce((acc, cur) => {
+    acc[cur] = [];
+    return acc;
+  }, {} as Access);
+
   const {
+    register,
     control,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<UserFormItems>({ mode: 'all' });
+  } = useForm<UserDto>({
+    mode: 'all',
+    defaultValues: {
+      access: accessDefaultValues,
+    },
+  });
 
-  const onSubmit: SubmitHandler<UserFormItems> = (data) => {
+  const onSubmit: SubmitHandler<UserDto> = (data: UserDto) => {
     submitData(data);
     reset();
   };
+
+  const sectionPermissions = Object.values(Modules).map((section, index) => (
+    <SectionCheckboxes
+      key={index}
+      section={section}
+      name={`access.${section}`}
+      register={register}
+    />
+  ));
 
   return (
     <form className={styles.form}>
@@ -61,6 +82,7 @@ const UserForm = ({ submitData }: Props) => {
           </Input>
         )}
       />
+      {sectionPermissions}
       <div onClick={handleSubmit(onSubmit)} className={styles.button}>
         <Button inverted={false} padding={'20px 30px'}>
           Save

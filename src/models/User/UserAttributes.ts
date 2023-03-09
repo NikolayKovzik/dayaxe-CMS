@@ -1,6 +1,5 @@
-export interface UserAttributes {
+import { UserDto } from './UserDto';
+
+export interface UserAttributes extends UserDto {
   id: string;
-  username: string;
-  password: string;
-  email: string;
 }

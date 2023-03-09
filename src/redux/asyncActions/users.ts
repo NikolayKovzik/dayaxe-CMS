@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { User } from '../../models/User/User';
 import UserService from '../../http/services/UserService';
-import { CreateUser } from '../../models/User/CreateUser';
+import { UserDto } from '../../models/User/UserDto';
 import { UserAttributes } from '../../models/User/UserAttributes';
 import { usersActions } from '../slices/users';
 
@@ -35,7 +35,7 @@ export const getUserById = createAsyncThunk<User, string, { rejectValue: string 
   },
 );
 
-export const createUser = createAsyncThunk<void, CreateUser, { rejectValue: string }>(
+export const createUser = createAsyncThunk<void, UserDto, { rejectValue: string }>(
   'users/createUser',
   async (body, { rejectWithValue, dispatch }) => {
     const { data, status } = await UserService.createUser(body);

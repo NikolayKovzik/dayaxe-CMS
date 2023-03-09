@@ -1,0 +1,39 @@
+@import '../../styles/utils/variables';
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.sectionTitle {
+  font-weight: 700;
+  font-size: 20px;
+  color: $primary-text-color;
+}
+
+.inputsContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.input {
+  margin-right: 5px;
+}
+
+.label {
+  cursor: pointer;
+  font-size: 0.875em;
+  line-height: 1.35em;
+  color: $primary-text-color;
+}

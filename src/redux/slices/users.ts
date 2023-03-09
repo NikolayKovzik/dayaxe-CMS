@@ -5,17 +5,20 @@ import { createUser, deleteUser, getAllUsers, updateUser } from '../asyncActions
 interface State {
   users: User[];
   loading: boolean;
+  success: boolean;
   error: string | null;
 }
 
 export const initialState: State = {
   users: [],
   loading: false,
+  success: false,
   error: null,
 };
 
 const onPending = (state: State) => {
   state.loading = true;
+  state.success = false;
   state.error = null;
 };
 
@@ -23,6 +26,7 @@ const isError = (action: AnyAction) => action.type.endsWith('rejected');
 
 const onFulfilled = (state: State) => {
   state.loading = false;
+  state.success = true;
 };
 
 const users = createSlice({

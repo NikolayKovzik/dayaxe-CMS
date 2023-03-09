@@ -9,7 +9,6 @@ import { selectUsers } from '../../redux/store/selectors';
 import Loader from '../../UI/Loader';
 
 const UserCard = (user: User) => {
-  const { loading } = useAppSelector(selectUsers);
   const [isEditable, setIsEditable] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -19,7 +18,6 @@ const UserCard = (user: User) => {
 
   return (
     <li key={user._id} className={styles.card}>
-      {loading && <Loader />}
       {isEditable ? (
         <EditUserForm userId={user._id} close={() => setIsEditable(false)} />
       ) : (

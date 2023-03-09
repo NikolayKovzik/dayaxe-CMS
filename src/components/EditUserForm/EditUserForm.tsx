@@ -1,11 +1,10 @@
 import React from 'react';
 import UserForm from '../UserForm';
 import styles from './styles.module.scss';
-import { UserFormItems } from '../UserForm/models';
 import icons from '../../assets/icons.svg';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectUsers } from '../../redux/store/selectors';
+import { useAppDispatch } from '../../hooks/redux';
 import { updateUser } from '../../redux/asyncActions/users';
+import { UserDto } from '../../models/User/UserDto';
 
 interface Props {
   close: () => void;
@@ -13,10 +12,9 @@ interface Props {
 }
 
 const EditUserForm = ({ close, userId }: Props) => {
-  const { loading, error } = useAppSelector(selectUsers);
   const dispatch = useAppDispatch();
 
-  const editUser = (data: UserFormItems) => {
+  const editUser = (data: UserDto) => {
     dispatch(updateUser({ id: userId, ...data }));
     close();
   };
