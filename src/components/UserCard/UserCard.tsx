@@ -3,11 +3,9 @@ import Button from '../../UI/Button';
 import EditUserForm from '../EditUserForm';
 import styles from './styles.module.scss';
 import { User } from '../../models/User/User';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
 import { deleteUser } from '../../redux/asyncActions/users';
-import { selectUsers } from '../../redux/store/selectors';
-import Loader from '../../UI/Loader';
-import { Access, AccessType } from '../../models/User/UserDto';
+import { Access} from '../../models/User/UserDto';
 
 const UserCard = (user: User) => {
   const [isEditable, setIsEditable] = useState(false);
