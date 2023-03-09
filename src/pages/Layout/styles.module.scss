@@ -31,6 +31,10 @@
   }
 }
 
+.sidebar {
+  flex-grow: 0;
+}
+
 .content {
   border-radius: 10px;
   background-color: $white;

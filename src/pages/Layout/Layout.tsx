@@ -11,7 +11,9 @@ const Layout = () => {
         <Header />
       </div>
       <main className={styles.main}>
-        <SideBar />
+        <div className={styles.sidebar}>
+          <SideBar />
+        </div>
         <div className={styles.content}>
           <Outlet />
         </div>
