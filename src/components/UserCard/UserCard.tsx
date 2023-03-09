@@ -18,7 +18,7 @@ const UserCard = (user: User) => {
   return (
     <li key={user._id} className={styles.card}>
       {isEditable ? (
-        <EditUserForm userId={user._id} close={() => setIsEditable(false)} />
+        <EditUserForm user={user} close={() => setIsEditable(false)} />
       ) : (
         <div className={styles.cardContent}>
           <div className={styles.fields}>
