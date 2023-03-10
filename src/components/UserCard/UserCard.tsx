@@ -27,9 +27,6 @@ const UserCard = (user: User) => {
 
               if (isValueObject) {
                 return Object.entries(value).map(([key, value]) => {
-                  if (key === '_id') {
-                    return null;
-                  }
 
                   return (
                     <div key={key} className={styles.cardItem}>
