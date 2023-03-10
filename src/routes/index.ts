@@ -1,4 +1,6 @@
 enum RoutesList {
+  SIGN_IN = '/signin',
+  SIGN_UP = '/signup',
   DEFAULT = '/',
   USERS = '/users',
   DAYCATION = '/daycation',

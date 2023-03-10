@@ -1,0 +1,38 @@
+@use "../../styles/utils/variables.scss" as var;
+@use "../../styles/mixins/breakpoints.scss" as bp;
+
+.signUpSection {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 20px;
+  align-items: flex-start;
+  padding: 50px 20vw;
+
+  color: var.$primary-text-color;
+  cursor: default;
+
+  @include bp.screen-l {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.title {
+  text-align: center;
+  color: var.$primary-color;
+}
+
+.signInLink {
+  color: var.$primary-color;
+}
+
+.formContainer {
+  width: 60vw;
+  margin: 0 auto;
+}

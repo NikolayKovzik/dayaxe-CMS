@@ -15,7 +15,7 @@ const AddUserForm = ({ close }: Props) => {
 
   const defaultValues = {
     access: Object.values(Modules).reduce((acc, cur) => {
-      acc[cur] = [];
+      acc[cur] = ['read'];
       return acc;
     }, {} as Access),
   };

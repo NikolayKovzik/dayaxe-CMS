@@ -1,0 +1,16 @@
+@use '../../styles/mixins/breakpoints.scss' as bp;
+@import '../../styles/utils/variables';
+
+.form {
+  width: 100%;
+}
+
+.button {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.roles {
+  display: flex;
+  gap: 10px;
+}

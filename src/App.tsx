@@ -13,6 +13,8 @@ import NotFound from './pages/NotFound';
 import './styles/main.scss';
 import RoutesList from './routes';
 import 'react-toastify/dist/ReactToastify.css';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
       <ToastContainer />
       <BrowserRouter>
         <Routes>
+          <Route path={RoutesList.SIGN_IN} element={<SignIn />} />
+          <Route path={RoutesList.SIGN_UP} element={<SignUp />} />
           <Route path={RoutesList.DEFAULT} element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path={RoutesList.USERS} element={<Users />} />
