@@ -28,7 +28,6 @@ const SignInForm = () => {
 
   const onSubmit: SubmitHandler<UserDto | RegisterUserDto | LoginUserDto> = (data: UserDto | RegisterUserDto | LoginUserDto) => {
     // dispatch());
-    // close();
     // reset();
   };
 

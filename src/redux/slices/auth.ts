@@ -4,12 +4,14 @@ import { User } from '../../models/User/User';
 import { registerUser } from '../asyncActions/auth';
 
 interface State {
+  isAuth: boolean;
   loading: boolean;
   success: boolean;
   error: string | null;
 }
 
 export const initialState: State = {
+  isAuth: false,
   loading: false,
   success: false,
   error: null,
@@ -30,7 +32,7 @@ const onFulfilled = (state: State) => {
 };
 
 
-const users = createSlice({
+const auth = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -39,7 +41,7 @@ const users = createSlice({
     // },
   },
   extraReducers: (builder) => {
-    builder.addCase(registerUser.pending, (state, { payload }) => {
+    builder.addCase(registerUser.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
@@ -47,6 +49,7 @@ const users = createSlice({
     builder.addCase(registerUser.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
       state.loading = false;
       localStorage.setItem('DayaxeAuthToken', action.payload.token)
+      state.isAuth = true;
     });
 
     builder.addMatcher(isError, (state, action: PayloadAction<string>) => {
@@ -56,5 +59,5 @@ const users = createSlice({
   },
 });
 
-export const usersActions = users.actions;
-export default users.reducer;
+export const authActions = auth.actions;
+export default auth.reducer;
