@@ -1,4 +1,4 @@
-import $api from '../api';
+import { $api } from '../api';
 import { AxiosResponse } from 'axios';
 import { LoginUserDto, RegisterUserDto } from '../../models/User/UserDto';
 import { AuthResponse } from '../../models/Auth/authResponse';

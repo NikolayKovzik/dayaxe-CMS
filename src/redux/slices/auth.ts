@@ -8,6 +8,7 @@ interface State {
   loading: boolean;
   success: boolean;
   error: string | null;
+  user: User | null;
 }
 
 export const initialState: State = {
@@ -15,6 +16,7 @@ export const initialState: State = {
   loading: false,
   success: false,
   error: null,
+  user: null,
 };
 
 
@@ -48,8 +50,10 @@ const auth = createSlice({
 
     builder.addCase(registerUser.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
       state.loading = false;
-      localStorage.setItem('DayaxeAuthToken', action.payload.token)
+      localStorage.setItem('DayaxeAuthToken', action.payload.token);
+      state.user = action.payload.user;
       state.isAuth = true;
+      
     });
 
     builder.addMatcher(isError, (state, action: PayloadAction<string>) => {

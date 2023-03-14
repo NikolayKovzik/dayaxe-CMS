@@ -1,9 +1,18 @@
-import axios from 'axios';
+import axios, { InternalAxiosRequestConfig } from 'axios';
 
 export const API_URL = 'http://localhost:4000';
 
-const $api = axios.create({
+export const $api = axios.create({
   baseURL: API_URL,
 });
 
-export default $api;
+export const $authApi = axios.create({
+  baseURL: API_URL,
+});
+
+const authInterceptor = (config: InternalAxiosRequestConfig<any>) => {
+  config.headers.authorization = `Bearer ${localStorage.getItem('DayaxeAuthToken')}`;
+  return config;
+}
+
+$authApi.interceptors.request.use(authInterceptor);
