@@ -1,4 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
+import { localStorageTokenKey } from '../../constants/auth';
 
 export const API_URL = 'http://localhost:4000';
 
@@ -11,8 +12,8 @@ export const $authApi = axios.create({
 });
 
 const authInterceptor = (config: InternalAxiosRequestConfig<any>) => {
-  config.headers.authorization = `Bearer ${localStorage.getItem('DayaxeAuthToken')}`;
+  config.headers.authorization = `Bearer ${localStorage.getItem(localStorageTokenKey)}`;
   return config;
-}
+};
 
 $authApi.interceptors.request.use(authInterceptor);

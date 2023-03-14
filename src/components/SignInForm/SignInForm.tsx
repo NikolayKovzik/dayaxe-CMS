@@ -8,8 +8,7 @@ import Input from '../../UI/Input';
 import Eye from '../../UI/Eye';
 import Button from '../../UI/Button';
 import { useAppDispatch } from '../../hooks/redux';
-import { createUser } from '../../redux/asyncActions/users';
-
+import { loginUser } from '../../redux/asyncActions/auth';
 
 const SignInForm = () => {
   const { password, email } = validation;
@@ -26,9 +25,11 @@ const SignInForm = () => {
     mode: 'all',
   });
 
-  const onSubmit: SubmitHandler<UserDto | RegisterUserDto | LoginUserDto> = (data: UserDto | RegisterUserDto | LoginUserDto) => {
-    // dispatch());
-    // reset();
+  const onSubmit: SubmitHandler<UserDto | RegisterUserDto | LoginUserDto> = (
+    data: UserDto | RegisterUserDto | LoginUserDto,
+  ) => {
+    dispatch(loginUser(data));
+    reset();
   };
 
   return (

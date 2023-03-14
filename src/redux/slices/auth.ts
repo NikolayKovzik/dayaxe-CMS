@@ -1,7 +1,8 @@
 import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthResponse } from '../../models/Auth/authResponse';
 import { User } from '../../models/User/User';
-import { registerUser } from '../asyncActions/auth';
+import { checkAuth, loginUser, registerUser } from '../asyncActions/auth';
+import { localStorageTokenKey } from '../../constants/auth';
 
 interface State {
   isAuth: boolean;
@@ -19,46 +20,60 @@ export const initialState: State = {
   user: null,
 };
 
-
-const onPending = (state: State) => {
-  state.loading = true;
-  state.success = false;
-  state.error = null;
-};
-
 const isError = (action: AnyAction) => action.type.endsWith('rejected');
-
-const onFulfilled = (state: State) => {
-  state.loading = false;
-  state.success = true;
-};
-
 
 const auth = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // addUser(state, { payload }: PayloadAction<User>) {
-    //   state.users.push(payload);
-    // },
+    logout: (state) => {
+      localStorage.removeItem(localStorageTokenKey);
+      state.user = null;
+      state.isAuth = false;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(registerUser.pending, (state) => {
       state.loading = true;
       state.error = null;
+      state.success = false;
     });
-
     builder.addCase(registerUser.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
       state.loading = false;
-      localStorage.setItem('DayaxeAuthToken', action.payload.token);
+      localStorage.setItem(localStorageTokenKey, action.payload.token);
       state.user = action.payload.user;
       state.isAuth = true;
-      
+      state.success = true;
+    });
+
+    builder.addCase(loginUser.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+      state.success = false;
+    });
+    builder.addCase(loginUser.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
+      state.loading = false;
+      localStorage.setItem(localStorageTokenKey, action.payload.token);
+      state.user = action.payload.user;
+      state.isAuth = true;
+      state.success = true;
+    });
+
+    builder.addCase(checkAuth.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(checkAuth.fulfilled, (state, action: PayloadAction<AuthResponse>) => {
+      state.loading = false;
+      localStorage.setItem(localStorageTokenKey, action.payload.token);
+      state.user = action.payload.user;
+      state.isAuth = true;
     });
 
     builder.addMatcher(isError, (state, action: PayloadAction<string>) => {
       state.loading = false;
       state.error = action.payload;
+      state.success = false;
     });
   },
 });

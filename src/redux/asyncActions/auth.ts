@@ -20,11 +20,24 @@ export const registerUser = createAsyncThunk<AuthResponse, RegisterUserDto, { re
 
 );
 
-export const loginUser = createAsyncThunk<string, LoginUserDto, { rejectValue: string }>(
+export const loginUser = createAsyncThunk<AuthResponse, LoginUserDto, { rejectValue: string }>(
   'auth/login',
   async (body, { rejectWithValue }) => {
     try {
       const { data } = await AuthService.signIn(body);
+      return data;
+    } catch (error) {
+      const message = (error as AxiosError).message;
+      return rejectWithValue(decodeErrorMessage(message));
+    }
+  },
+);
+
+export const checkAuth = createAsyncThunk<AuthResponse, void, { rejectValue: string }>(
+  'auth/check',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await AuthService.check();
       return data;
     } catch (error) {
       const message = (error as AxiosError).message;

@@ -1,0 +1,32 @@
+@use '../../styles/mixins/breakpoints' as bp;
+@import '../../styles/utils/variables';
+
+.header {
+  padding: 30px 24px;
+  margin: 0 auto;
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include bp.screen-m {
+    padding: 30px 40px;
+  }
+
+  @include bp.screen-xl {
+    max-width: 1360px;
+  }
+}
+
+.nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.username {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
