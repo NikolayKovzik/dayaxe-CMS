@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
 import { useAppDispatch } from '../../hooks/redux';
 import { createUser } from '../../redux/asyncActions/users';
-import { Access, Modules, UserDto } from '../../models/User/UserDto';
+import { Access, LoginUserDto, Modules, RegisterUserDto, UserDto } from '../../models/User/UserDto';
 import UserForm from '../UserForm';
 
 interface Props {
@@ -25,13 +25,13 @@ const AddUserForm = ({ close }: Props) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<UserDto>({
+  } = useForm<UserDto | RegisterUserDto | LoginUserDto>({
     mode: 'all',
     defaultValues,
   });
 
-  const onSubmit: SubmitHandler<UserDto> = (data: UserDto) => {
-    dispatch(createUser(data));
+  const onSubmit: SubmitHandler<UserDto | RegisterUserDto | LoginUserDto> = (data: UserDto | RegisterUserDto | LoginUserDto) => {
+    dispatch(createUser(data as UserDto));
     close();
     reset();
   };

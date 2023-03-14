@@ -1,41 +1,34 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
-import { Access, Modules, UserDto } from '../../models/User/UserDto';
+import { LoginUserDto, RegisterUserDto, UserDto } from '../../models/User/UserDto';
 import validation from '../../constants/user-validation';
 import usePasswordVisibility from '../../hooks/usePasswordVisibility';
 import Input from '../../UI/Input';
 import Eye from '../../UI/Eye';
 import Button from '../../UI/Button';
 import { useAppDispatch } from '../../hooks/redux';
-import { createUser } from '../../redux/asyncActions/users';
+import { registerUser } from '../../redux/asyncActions/auth';
 
 
 const SignUpForm = () => {
-  const { password, email } = validation;
+  const { username, password, email } = validation;
   const { isVisible, toggle } = usePasswordVisibility();
 
   const dispatch = useAppDispatch();
 
-  const defaultValues = {
-    access: Object.values(Modules).reduce((acc, cur) => {
-      acc[cur] = [];
-      return acc;
-    }, {} as Access),
-  };
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<UserDto>({
+  } = useForm<UserDto | RegisterUserDto | LoginUserDto>({
     mode: 'all',
-    defaultValues,
   });
 
-  const onSubmit: SubmitHandler<UserDto> = (data: UserDto) => {
-    dispatch(createUser(data));
+  const onSubmit: SubmitHandler<UserDto | RegisterUserDto | LoginUserDto> = (data: UserDto | RegisterUserDto | LoginUserDto) => {
+    dispatch(registerUser(data as RegisterUserDto)); //! :)
     close();
     reset();
   };
@@ -43,6 +36,16 @@ const SignUpForm = () => {
   return (
     <div className={styles.formWrapper}>
       <form className={styles.form}>
+        <Input
+          name={'username'}
+          label={'Username'}
+          register={register}
+          options={{
+            required: username.required,
+            minLength: { value: 3, message: username.message },
+          }}
+          errors={errors}
+        />
         <Input
           name={'email'}
           label={'Email'}

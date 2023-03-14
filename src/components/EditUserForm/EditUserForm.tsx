@@ -4,9 +4,10 @@ import styles from './styles.module.scss';
 import icons from '../../assets/icons.svg';
 import { useAppDispatch } from '../../hooks/redux';
 import { updateUser } from '../../redux/asyncActions/users';
-import { UserDto } from '../../models/User/UserDto';
+import { LoginUserDto, RegisterUserDto, UserDto } from '../../models/User/UserDto';
 import { User } from '../../models/User/User';
 import UserForm from '../UserForm';
+import { UserAttributes } from '../../models/User/UserAttributes';
 
 interface Props {
   close: () => void;
@@ -22,13 +23,14 @@ const EditUserForm = ({ close, user }: Props) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<UserDto>({
+  } = useForm<UserDto | RegisterUserDto | LoginUserDto>({
     mode: 'all',
     defaultValues,
   });
 
-  const onSubmit: SubmitHandler<UserDto> = (data: UserDto) => {
-    dispatch(updateUser({ id: user._id, ...data }));
+
+  const onSubmit: SubmitHandler<UserDto | RegisterUserDto | LoginUserDto> = (data: UserDto | RegisterUserDto | LoginUserDto) => {
+    dispatch(updateUser({ id: user._id, ...data } as UserAttributes));
     close();
     reset();
   };

@@ -2,11 +2,11 @@ import React, { PropsWithChildren } from 'react';
 import { FieldErrors, Path, UseFormRegister, RegisterOptions } from 'react-hook-form';
 import styles from './styles.module.scss';
 import FormError from '../FormError';
-import { UserDto } from '../../models/User/UserDto';
+import { LoginUserDto, RegisterUserDto, UserDto } from '../../models/User/UserDto';
 
 interface Props {
-  name: Path<UserDto>;
-  register: UseFormRegister<UserDto>;
+  name: Path<UserDto | RegisterUserDto | LoginUserDto>;
+  register: UseFormRegister<UserDto | RegisterUserDto | LoginUserDto>;
   options?: RegisterOptions;
   label: string;
   isVisible?: boolean;

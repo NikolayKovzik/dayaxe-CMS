@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import styles from './styles.module.scss';
-import { Modules, UserDto } from '../../models/User/UserDto';
+import { LoginUserDto, Modules, RegisterUserDto, UserDto } from '../../models/User/UserDto';
 import validation from '../../constants/user-validation';
 import usePasswordVisibility from '../../hooks/usePasswordVisibility';
 import SectionCheckboxes from '../SectionCheckboxes';
@@ -11,7 +11,7 @@ import Button from '../../UI/Button';
 
 interface Props {
   onSubmit: () => void;
-  register: UseFormRegister<UserDto>;
+  register: UseFormRegister<UserDto | RegisterUserDto | LoginUserDto>;
   errors: FieldErrors;
 }
 

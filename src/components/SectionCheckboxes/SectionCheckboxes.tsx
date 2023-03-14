@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 import { Path, UseFormRegister } from 'react-hook-form';
 import styles from './styles.module.scss';
-import { UserDto } from '../../models/User/UserDto';
+import { LoginUserDto, RegisterUserDto, UserDto } from '../../models/User/UserDto';
 
 interface Props {
-  name: Path<UserDto>;
-  register: UseFormRegister<UserDto>;
+  name: Path<UserDto | RegisterUserDto | LoginUserDto>;
+  register: UseFormRegister<UserDto | RegisterUserDto | LoginUserDto>;
   section: string;
 }
 
