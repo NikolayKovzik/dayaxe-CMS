@@ -51,19 +51,22 @@ const App = () => {
     if (success) {
       toast.success('Success', {
         position: toast.POSITION.TOP_RIGHT,
+        onOpen: () => {
+          dispatch(authActions.resetSuccess());
+        }
       });
     }
-    dispatch(authActions.resetSuccess());
   }, [success]);
 
   useEffect(() => {
     if (error) {
       toast.error(error, {
         position: toast.POSITION.TOP_RIGHT,
+        onOpen: () => {
+          dispatch(authActions.resetError());
+        }
       });
     }
-    console.log('auth useef error');
-    dispatch(authActions.resetError());
   }, [error]);
 
   if (loading) {

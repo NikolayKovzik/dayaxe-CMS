@@ -48,6 +48,12 @@ const users = createSlice({
     deleteUser(state, { payload }: PayloadAction<string>) {
       state.users = state.users.filter((user) => user._id !== payload);
     },
+    resetError: (state) => {
+      state.error = null;
+    },
+    resetSuccess: (state) => {
+      state.success = false;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.pending, (state) => {
