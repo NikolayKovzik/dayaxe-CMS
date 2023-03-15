@@ -1,9 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import AuthService from "../../http/services/AuthService";
 import { LoginUserDto, RegisterUserDto } from "../../models/User/UserDto";
-import { AxiosError } from 'axios';
 import { AuthResponse } from "../../models/Auth/authResponse";
-import decodeErrorMessage from "../../utils/decodeErrorMessage";
+import { handleAxiosError } from "../../utils/handleAxiosErrors";
 
 
 export const registerUser = createAsyncThunk<AuthResponse, RegisterUserDto, { rejectValue: string }>(
@@ -13,8 +12,7 @@ export const registerUser = createAsyncThunk<AuthResponse, RegisterUserDto, { re
       const { data } = await AuthService.signUp(body);
       return data;
     } catch (error) {
-      const message = (error as AxiosError).message;
-      return rejectWithValue(decodeErrorMessage(message));
+      return rejectWithValue(handleAxiosError(error));
     }
   },
 
@@ -27,8 +25,7 @@ export const loginUser = createAsyncThunk<AuthResponse, LoginUserDto, { rejectVa
       const { data } = await AuthService.signIn(body);
       return data;
     } catch (error) {
-      const message = (error as AxiosError).message;
-      return rejectWithValue(decodeErrorMessage(message));
+      return rejectWithValue(handleAxiosError(error));
     }
   },
 );
@@ -40,8 +37,7 @@ export const checkAuth = createAsyncThunk<AuthResponse, void, { rejectValue: str
       const { data } = await AuthService.check();
       return data;
     } catch (error) {
-      const message = (error as AxiosError).message;
-      return rejectWithValue(decodeErrorMessage(message));
+      return rejectWithValue(handleAxiosError(error));
     }
   },
 );
