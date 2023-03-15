@@ -1,0 +1,26 @@
+@import '../../../../styles/utils/variables';
+
+.navBar {
+}
+
+.menuItem {
+}
+
+.menuLink {
+  display: block;
+  padding: 10px;
+  border-radius: 10px;
+  color: $primary-text-color;
+  font-size: 20px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $primary-color;
+    background-color: $secondary-background;
+  }
+}
+
+.menuLink_active {
+  color: $primary-color;
+  background-color: $secondary-background;
+}

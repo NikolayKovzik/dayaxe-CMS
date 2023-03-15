@@ -1,0 +1,27 @@
+@use '../../styles/mixins/breakpoints.scss' as bp;
+@import '../../styles/utils/variables';
+
+.formWrapper {
+  position: relative;
+  width: 100%;
+
+  @include bp.screen-m {
+  }
+}
+
+.closeButton {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  z-index: 500;
+  cursor: pointer;
+  width: 1.5em;
+  height: 1.5em;
+  fill: $grey;
+  transition: all 0.3s ease;
+
+
+  &:hover {
+    fill: $primary-color;
+  }
+}

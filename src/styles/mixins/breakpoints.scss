@@ -1,31 +1,34 @@
-@use "../utils/variables.scss" as var;
+$screen-sm: 480px;
+$screen-m: 768px;
+$screen-l: 1024px;
+$screen-xl: 1440px;
 
-@mixin mobile-s {
-  @media (min-width: #{var.$screen-mobile-s}) {
-      @content;
+@mixin screen-sm {
+  @media (min-width: #{$screen-sm}) {
+    @content;
   }
 }
 
-@mixin tablet {
-  @media (min-width: #{var.$screen-tablet}) {
-      @content;
+@mixin screen-m {
+  @media (min-width: #{$screen-m}) {
+    @content;
   }
 }
 
-@mixin laptop {
-  @media (min-width: #{var.$screen-laptop}) {
-      @content;
+@mixin screen-l {
+  @media (min-width: #{$screen-l}) {
+    @content;
   }
 }
 
-@mixin laptop-l {
-  @media (min-width: #{var.$screen-laptop-l}) {
-      @content;
+@mixin screen-xl {
+  @media (min-width: #{$screen-xl}) {
+    @content;
   }
 }
 
 @mixin screen-min-width($screen) {
   @media (min-width: $screen) {
-      @content;
+    @content;
   }
 }

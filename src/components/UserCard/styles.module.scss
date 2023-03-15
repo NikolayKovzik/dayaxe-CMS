@@ -1,0 +1,39 @@
+@use '../../styles/mixins/breakpoints.scss' as bp;
+@import '../../styles/utils/variables';
+@import '../../styles/mixins/itemsWidthBetweenGaps.scss';
+
+.card {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: $shadow;
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cardItem {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.itemKey {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.itemValue {
+  color: $primary-text-color;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}

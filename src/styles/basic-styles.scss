@@ -1,15 +1,10 @@
-@use "../styles/mixins/breakpoints.scss" as bp;
+@use '../styles/mixins/breakpoints.scss' as bp;
+@import '../styles/utils/variables.scss';
 
 * {
-  font-family: "Gilroy";
+  font-family: 'Gilroy', sans-serif;
   box-sizing: border-box;
   scroll-behavior: smooth;
-}
-
-*,
-*::after,
-*::before {
-  box-sizing: inherit;
 }
 
 h1,
@@ -39,37 +34,23 @@ ul {
 }
 
 button {
-  // display: block;
-  padding: 0px;
+  padding: 0;
   border: none;
-
   cursor: pointer;
 }
 
-.body {
-  display: flex;
-  flex-direction: column;
-
-  &--stop-scrolling {
-    height: 100%;
-    overflow: hidden;
-  }
+body {
+  font-size: 16px;
+  min-width: 320px;
+  overflow-x: hidden;
+  color: $primary-color;
 }
 
-.container {
-  max-width: 1128px; // 1440 minus paddings
-  margin: 0 auto;
-
-  padding-right: 24px;
-  padding-left: 24px;
-
-  @include bp.tablet {
-    padding-right: 40px;
-    padding-left: 40px;
-  }
-
-  @include bp.laptop {
-    padding-right: 156px;
-    padding-left: 156px;
-  }
+input:focus,
+input:focus-visible,
+button:focus,
+button:focus-visible,
+textarea:focus,
+textarea:focus-visible {
+  outline: none;
 }

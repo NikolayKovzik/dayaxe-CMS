@@ -1,0 +1,17 @@
+@use '../../styles/mixins/breakpoints.scss' as bp;
+@import '../../styles/utils/variables';
+@import '../../styles/mixins/itemsWidthBetweenGaps.scss';
+
+.users {
+}
+
+.addUserButton {
+  width: 100%;
+
+  @include bp.screen-m {
+    width: 50%;
+  }
+  @include bp.screen-l {
+    width: 30%;
+  }
+}
