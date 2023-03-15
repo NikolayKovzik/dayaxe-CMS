@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { Route } from 'react-router-dom';
-import { Routes, useNavigate } from 'react-router';
+import { Routes, useLocation, useNavigate } from 'react-router';
 import Layout from './pages/Layout';
 import HomePage from './pages/HomePage';
 import Daycation from './pages/Daycation';
@@ -26,8 +26,10 @@ const App = () => {
   const { isAuth, loading, error, success } = useAppSelector(selectAuth);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  console.log(location.pathname);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(checkAuth());
     // if (isAuth) {
     //   navigate(RoutesList.DEFAULT);
@@ -35,9 +37,12 @@ const App = () => {
     //   navigate(RoutesList.SIGN_IN);
     // }
     // console.log('[]', isAuth);
+    if (isAuth) {
+      navigate(location.pathname);
+    }
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isAuth) {
       navigate(RoutesList.DEFAULT);
     } else {
@@ -45,7 +50,7 @@ const App = () => {
     }
     console.log('isAuth change', isAuth);
   }, [isAuth]);
-  
+
 
   useEffect(() => {
     if (success) {
@@ -86,7 +91,6 @@ const App = () => {
             <Route path={RoutesList.DAYCATION} element={<Daycation />} />
             <Route path={RoutesList.PROMOTIONS} element={<Promotions />} />
             <Route path={RoutesList.MOMENTS} element={<Moments />} />
-            <Route path={RoutesList.NOT_FOUND} element={<NotFound />} />
           </Route>
         ) : (
           <>
@@ -94,6 +98,7 @@ const App = () => {
             <Route path={RoutesList.SIGN_UP} element={<SignUp />} />
           </>
         )}
+        <Route path={RoutesList.NOT_FOUND} element={<NotFound />} />
       </Routes>
     </>
   );

@@ -12,10 +12,14 @@
   justify-content: space-between;
   row-gap: 20px;
   align-items: flex-start;
-  padding: 50px 20vw;
+  padding: 40px 10vw;
 
   color: var.$primary-text-color;
   cursor: default;
+
+  @include bp.screen-m {
+    padding: 50px 20vw;
+  }
 
   @include bp.screen-l {
     flex-direction: row;
@@ -33,6 +37,10 @@
 }
 
 .formContainer {
-  width: 60vw;
+  width: 80vw;
   margin: 0 auto;
+
+  @include bp.screen-m {
+    width: 60vw;
+  }
 }
