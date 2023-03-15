@@ -27,8 +27,13 @@ const App = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(checkAuth());
+    if (isAuth) {
+      navigate(RoutesList.DEFAULT);
+    } else {
+      navigate(RoutesList.SIGN_IN);
+    }
   }, []);
 
   useLayoutEffect(() => {
