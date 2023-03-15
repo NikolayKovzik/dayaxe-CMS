@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { Route } from 'react-router-dom';
-import { Routes, useLocation, useNavigate } from 'react-router';
+import { Routes, useNavigate } from 'react-router';
 import Layout from './pages/Layout';
 import HomePage from './pages/HomePage';
 import Daycation from './pages/Daycation';
@@ -26,20 +26,9 @@ const App = () => {
   const { isAuth, loading, error, success } = useAppSelector(selectAuth);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const location = useLocation();
-  console.log(location.pathname);
 
   useLayoutEffect(() => {
     dispatch(checkAuth());
-    // if (isAuth) {
-    //   navigate(RoutesList.DEFAULT);
-    // } else {
-    //   navigate(RoutesList.SIGN_IN);
-    // }
-    // console.log('[]', isAuth);
-    if (isAuth) {
-      navigate(location.pathname);
-    }
   }, []);
 
   useLayoutEffect(() => {
@@ -48,7 +37,6 @@ const App = () => {
     } else {
       navigate(RoutesList.SIGN_IN);
     }
-    console.log('isAuth change', isAuth);
   }, [isAuth]);
 
 
