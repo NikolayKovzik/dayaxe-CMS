@@ -4,8 +4,7 @@ import UserService from '../../http/services/UserService';
 import { UserDto } from '../../models/User/UserDto';
 import { UserAttributes } from '../../models/User/UserAttributes';
 import { usersActions } from '../slices/users';
-import { AxiosError } from 'axios';
-import decodeErrorMessage from '../../utils/decodeErrorMessage';
+import { handleAxiosError } from '../../utils/handleAxiosErrors';
 
 export const getAllUsers = createAsyncThunk<User[], void, { rejectValue: string }>(
   'users/getAllUsers',
@@ -14,8 +13,7 @@ export const getAllUsers = createAsyncThunk<User[], void, { rejectValue: string 
       const { data } = await UserService.getAllUsers();
       return data;
     } catch (error) {
-      const message = (error as AxiosError).message;
-      return rejectWithValue(decodeErrorMessage(message));
+      return rejectWithValue(handleAxiosError(error));
     }
   },
 );
@@ -27,8 +25,7 @@ export const getUserById = createAsyncThunk<User, string, { rejectValue: string 
       const { data } = await UserService.getUserById(id);
       return data;
     } catch (error) {
-      const message = (error as AxiosError).message;
-      return rejectWithValue(decodeErrorMessage(message));
+      return rejectWithValue(handleAxiosError(error));
     }
   },
 );
@@ -40,8 +37,7 @@ export const createUser = createAsyncThunk<void, UserDto, { rejectValue: string 
       const { data } = await UserService.createUser(body);
       dispatch(usersActions.addUser(data));
     } catch (error) {
-      const message = (error as AxiosError).message;
-      return rejectWithValue(decodeErrorMessage(message));
+      return rejectWithValue(handleAxiosError(error));
     }
   },
 );
@@ -55,8 +51,7 @@ export const updateUser = createAsyncThunk<void, UserAttributes, { rejectValue: 
 
       dispatch(usersActions.updateUser(data));
     } catch (error) {
-      const message = (error as AxiosError).message;
-      return rejectWithValue(decodeErrorMessage(message));
+      return rejectWithValue(handleAxiosError(error));
     }
   },
 );
@@ -68,8 +63,7 @@ export const deleteUser = createAsyncThunk<void, string, { rejectValue: string }
       await UserService.deleteUser(id);
       dispatch(usersActions.deleteUser(id));
     } catch (error) {
-      const message = (error as AxiosError).message;
-      return rejectWithValue(decodeErrorMessage(message));
+      return rejectWithValue(handleAxiosError(error));
     }
   },
 );

@@ -15,7 +15,7 @@ const AddUserForm = ({ close }: Props) => {
 
   const defaultValues = {
     access: Object.values(Modules).reduce((acc, cur) => {
-      acc[cur] = [];
+      acc[cur] = ['read'];
       return acc;
     }, {} as Access),
   };
@@ -38,7 +38,7 @@ const AddUserForm = ({ close }: Props) => {
 
   return (
     <div className={styles.formWrapper}>
-      <UserForm onSubmit={handleSubmit(onSubmit)} errors={errors} register={register} />
+      <UserForm<UserDto> onSubmit={handleSubmit(onSubmit)} errors={errors} register={register} />
     </div>
   );
 };

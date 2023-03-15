@@ -1,38 +1,42 @@
 import React from 'react';
-import { FieldErrors, FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
-import { Modules } from '../../models/User/UserDto';
+import { RegisterUserDto } from '../../models/User/UserDto';
 import validation from '../../constants/user-validation';
 import usePasswordVisibility from '../../hooks/usePasswordVisibility';
-import SectionCheckboxes from '../SectionCheckboxes';
 import Input from '../../UI/Input';
 import Eye from '../../UI/Eye';
 import Button from '../../UI/Button';
+import { useAppDispatch } from '../../hooks/redux';
+import { registerUser } from '../../redux/asyncActions/auth';
 
-interface Props<T extends FieldValues> {
-  onSubmit: () => void;
-  register: UseFormRegister<T>;
-  errors: FieldErrors;
-}
 
-function UserForm<T extends FieldValues> ({ onSubmit, register, errors }: Props<T>){
+const SignUpForm = () => {
   const { username, password, email } = validation;
   const { isVisible, toggle } = usePasswordVisibility();
 
-  const sectionPermissions = Object.values(Modules).map((section, index) => (
-    <SectionCheckboxes
-      key={index}
-      section={section}
-      name={`access.${section}` as Path<T>}
-      register={register}
-    />
-  ));
+  const dispatch = useAppDispatch();
+
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<RegisterUserDto>({
+    mode: 'all',
+  });
+
+  const onSubmit: SubmitHandler<RegisterUserDto> = (data: RegisterUserDto) => {
+    dispatch(registerUser(data));
+    reset();
+  };
 
   return (
     <div className={styles.formWrapper}>
       <form className={styles.form}>
-        <Input
-          name={'username' as Path<T>}
+        <Input<RegisterUserDto>
+          name={'username'}
           label={'Username'}
           register={register}
           options={{
@@ -41,8 +45,8 @@ function UserForm<T extends FieldValues> ({ onSubmit, register, errors }: Props<
           }}
           errors={errors}
         />
-        <Input
-          name={'email' as Path<T>}
+        <Input<RegisterUserDto>
+          name={'email'}
           label={'Email'}
           register={register}
           options={{
@@ -51,8 +55,8 @@ function UserForm<T extends FieldValues> ({ onSubmit, register, errors }: Props<
           }}
           errors={errors}
         />
-        <Input
-          name={'password' as Path<T>}
+        <Input<RegisterUserDto>
+          name={'password'}
           label={'Password'}
           register={register}
           options={{
@@ -64,10 +68,9 @@ function UserForm<T extends FieldValues> ({ onSubmit, register, errors }: Props<
         >
           <Eye handleClick={toggle} />
         </Input>
-        {sectionPermissions}
-        <div onClick={onSubmit} className={styles.button}>
+        <div onClick={handleSubmit(onSubmit)} className={styles.button}>
           <Button inverted={false} padding={'20px 30px'}>
-            Save
+            Sign Up
           </Button>
         </div>
       </form>
@@ -75,4 +78,4 @@ function UserForm<T extends FieldValues> ({ onSubmit, register, errors }: Props<
   );
 };
 
-export default UserForm;
+export default SignUpForm;

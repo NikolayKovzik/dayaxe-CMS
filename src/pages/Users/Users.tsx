@@ -6,17 +6,22 @@ import useModal from '../../hooks/useModal';
 import Modal from '../../components/Modal';
 import UserCards from '../../components/UserCards';
 import AddUserForm from '../../components/AddUserForm';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectUsers } from '../../redux/store/selectors';
+import { usersActions } from '../../redux/slices/users';
 
 const Users = () => {
   const { isShown, toggle } = useModal();
   const { error, success } = useAppSelector(selectUsers);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (success) {
       toast.success('Success !', {
         position: toast.POSITION.TOP_RIGHT,
+        onOpen: () => {
+          dispatch(usersActions.resetSuccess());
+        }
       });
     }
   }, [success]);
@@ -25,6 +30,9 @@ const Users = () => {
     if (error) {
       toast.error(error, {
         position: toast.POSITION.TOP_RIGHT,
+        onOpen: () => {
+          dispatch(usersActions.resetError());
+        }
       });
     }
   }, [error]);
