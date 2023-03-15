@@ -30,6 +30,12 @@ const auth = createSlice({
       localStorage.removeItem(localStorageTokenKey);
       state.user = null;
       state.isAuth = false;
+    },
+    resetError: (state) => {
+      state.error = null;
+    },
+    resetSuccess: (state) => {
+      state.success = false;
     }
   },
   extraReducers: (builder) => {

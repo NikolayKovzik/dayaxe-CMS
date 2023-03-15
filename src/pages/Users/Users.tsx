@@ -19,6 +19,7 @@ const Users = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
+    console.log('users useef success');
   }, [success]);
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const Users = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
+    console.log('users useef error');
   }, [error]);
 
   return (

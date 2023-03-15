@@ -6,16 +6,20 @@ const navBarItems = [
     content: 'Users',
   },
   {
+    link: RoutesList.HOTELS,
+    content: 'Hotels',
+  },
+  {
+    link: RoutesList.HOTEL_PASSES,
+    content: 'Hotel Passes',
+  },
+  {
     link: RoutesList.MOMENTS,
     content: 'Moments',
   },
   {
     link: RoutesList.DAYCATION,
     content: 'Daycation',
-  },
-  {
-    link: RoutesList.HOTEL_PASSES,
-    content: 'Hotel Passes',
   },
   {
     link: RoutesList.PROMOTIONS,

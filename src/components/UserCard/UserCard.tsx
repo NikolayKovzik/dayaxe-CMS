@@ -5,7 +5,6 @@ import styles from './styles.module.scss';
 import { User } from '../../models/User/User';
 import { useAppDispatch } from '../../hooks/redux';
 import { deleteUser } from '../../redux/asyncActions/users';
-import { Access} from '../../models/User/UserDto';
 
 const UserCard = (user: User) => {
   const [isEditable, setIsEditable] = useState(false);
@@ -22,28 +21,28 @@ const UserCard = (user: User) => {
       ) : (
         <div className={styles.cardContent}>
           <div className={styles.fields}>
-            {Object.entries(user).map(([key, value]: [key: string, value: Access | string]) => {
-              const isValueObject = typeof value === 'object' && value !== null;
-
-              if (isValueObject) {
-                return Object.entries(value).map(([key, value]) => {
-
-                  return (
-                    <div key={key} className={styles.cardItem}>
-                      <span className={styles.itemKey}>{key}:</span>
-                      <span className={styles.itemValue}>{value.join(', ')}</span>
-                    </div>
-                  );
-                });
-              } else {
+            <div className={styles.cardItem}>
+              <span className={styles.itemKey}>User ID:</span>
+              <span className={styles.itemValue}>{user._id}</span>
+            </div>
+            <div className={styles.cardItem}>
+              <span className={styles.itemKey}>Email:</span>
+              <span className={styles.itemValue}>{user.email}</span>
+            </div>
+            <div className={styles.cardItem}>
+              <span className={styles.itemKey}>Username:</span>
+              <span className={styles.itemValue}>{user.username}</span>
+            </div>
+            {
+              Object.entries(user.access).map(([key, value]) => {
                 return (
                   <div key={key} className={styles.cardItem}>
                     <span className={styles.itemKey}>{key}:</span>
-                    <span className={styles.itemValue}>{value}</span>
+                    <span className={styles.itemValue}>{value.join(', ')}</span>
                   </div>
                 );
-              }
-            })}
+              })
+            }
           </div>
           <div className={styles.buttons}>
             <div onClick={() => setIsEditable(true)} className={styles.button}>

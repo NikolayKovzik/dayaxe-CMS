@@ -19,6 +19,8 @@ import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { selectAuth } from './redux/store/selectors';
 import Loader from './UI/Loader';
 import { checkAuth } from './redux/asyncActions/auth';
+import { authActions } from './redux/slices/auth';
+import Hotels from './pages/Hotels';
 
 const App = () => {
   const { isAuth, loading, error, success } = useAppSelector(selectAuth);
@@ -27,6 +29,12 @@ const App = () => {
 
   useEffect(() => {
     dispatch(checkAuth());
+    // if (isAuth) {
+    //   navigate(RoutesList.DEFAULT);
+    // } else {
+    //   navigate(RoutesList.SIGN_IN);
+    // }
+    // console.log('[]', isAuth);
   }, []);
 
   useEffect(() => {
@@ -35,7 +43,9 @@ const App = () => {
     } else {
       navigate(RoutesList.SIGN_IN);
     }
+    console.log('isAuth change', isAuth);
   }, [isAuth]);
+  
 
   useEffect(() => {
     if (success) {
@@ -43,6 +53,7 @@ const App = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
+    dispatch(authActions.resetSuccess());
   }, [success]);
 
   useEffect(() => {
@@ -51,6 +62,8 @@ const App = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
+    console.log('auth useef error');
+    dispatch(authActions.resetError());
   }, [error]);
 
   if (loading) {
@@ -65,8 +78,9 @@ const App = () => {
           <Route path={RoutesList.DEFAULT} element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path={RoutesList.USERS} element={<Users />} />
-            <Route path={RoutesList.DAYCATION} element={<Daycation />} />
+            <Route path={RoutesList.HOTELS} element={<Hotels />} />
             <Route path={RoutesList.HOTEL_PASSES} element={<HotelPasses />} />
+            <Route path={RoutesList.DAYCATION} element={<Daycation />} />
             <Route path={RoutesList.PROMOTIONS} element={<Promotions />} />
             <Route path={RoutesList.MOMENTS} element={<Moments />} />
             <Route path={RoutesList.NOT_FOUND} element={<NotFound />} />
