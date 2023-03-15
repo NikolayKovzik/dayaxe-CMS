@@ -26,20 +26,9 @@ const App = () => {
   const { isAuth, loading, error, success } = useAppSelector(selectAuth);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const location = useLocation();
-  console.log(location.pathname);
 
   useLayoutEffect(() => {
     dispatch(checkAuth());
-    // if (isAuth) {
-    //   navigate(RoutesList.DEFAULT);
-    // } else {
-    //   navigate(RoutesList.SIGN_IN);
-    // }
-    // console.log('[]', isAuth);
-    if (isAuth) {
-      navigate(location.pathname);
-    }
   }, []);
 
   useLayoutEffect(() => {
@@ -48,7 +37,6 @@ const App = () => {
     } else {
       navigate(RoutesList.SIGN_IN);
     }
-    console.log('isAuth change', isAuth);
   }, [isAuth]);
 
 
