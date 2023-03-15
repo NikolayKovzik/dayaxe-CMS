@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldErrors, FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import styles from './styles.module.scss';
-import { LoginUserDto, Modules, RegisterUserDto, UserDto } from '../../models/User/UserDto';
+import { Modules } from '../../models/User/UserDto';
 import validation from '../../constants/user-validation';
 import usePasswordVisibility from '../../hooks/usePasswordVisibility';
 import SectionCheckboxes from '../SectionCheckboxes';

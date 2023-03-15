@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
 import { useAppDispatch } from '../../hooks/redux';
 import { createUser } from '../../redux/asyncActions/users';
-import { Access, LoginUserDto, Modules, RegisterUserDto, UserDto } from '../../models/User/UserDto';
+import { Access, Modules, UserDto } from '../../models/User/UserDto';
 import UserForm from '../UserForm';
 
 interface Props {

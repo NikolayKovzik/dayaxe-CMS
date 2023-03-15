@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 import icons from '../../assets/icons.svg';
 import { useAppDispatch } from '../../hooks/redux';
 import { updateUser } from '../../redux/asyncActions/users';
-import { LoginUserDto, RegisterUserDto, UserDto } from '../../models/User/UserDto';
+import { UserDto } from '../../models/User/UserDto';
 import { User } from '../../models/User/User';
 import UserForm from '../UserForm';
 import { UserAttributes } from '../../models/User/UserAttributes';

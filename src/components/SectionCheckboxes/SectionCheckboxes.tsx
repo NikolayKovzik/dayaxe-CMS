@@ -1,7 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import styles from './styles.module.scss';
-import { LoginUserDto, RegisterUserDto, UserDto } from '../../models/User/UserDto';
 
 interface Props<T extends FieldValues> {
   name: Path<T>;

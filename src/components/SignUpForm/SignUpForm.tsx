@@ -1,7 +1,7 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
-import { LoginUserDto, RegisterUserDto, UserDto } from '../../models/User/UserDto';
+import { RegisterUserDto } from '../../models/User/UserDto';
 import validation from '../../constants/user-validation';
 import usePasswordVisibility from '../../hooks/usePasswordVisibility';
 import Input from '../../UI/Input';
