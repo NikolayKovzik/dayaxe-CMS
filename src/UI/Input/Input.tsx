@@ -1,19 +1,19 @@
 import React, { PropsWithChildren } from 'react';
-import { FieldErrors, Path, UseFormRegister, RegisterOptions } from 'react-hook-form';
+import { FieldErrors, Path, UseFormRegister, RegisterOptions, FieldValues } from 'react-hook-form';
 import styles from './styles.module.scss';
 import FormError from '../FormError';
 import { LoginUserDto, RegisterUserDto, UserDto } from '../../models/User/UserDto';
 
-interface Props {
-  name: Path<UserDto | RegisterUserDto | LoginUserDto>;
-  register: UseFormRegister<UserDto | RegisterUserDto | LoginUserDto>;
+interface Props<T extends FieldValues> {
+  name: Path<T>;
+  register: UseFormRegister<T>;
   options?: RegisterOptions;
   label: string;
   isVisible?: boolean;
   errors: FieldErrors;
 }
 
-const Input = ({
+function Input<T extends FieldValues> ({
   name,
   register,
   options = {},
@@ -21,7 +21,7 @@ const Input = ({
   isVisible = true,
   errors,
   children,
-}: PropsWithChildren<Props>) => {
+}: PropsWithChildren<Props<T>>) {
   return (
     <div className={styles.inputWrapper}>
       <label className={styles.label} htmlFor={name}>

@@ -1,15 +1,15 @@
 import React, { PropsWithChildren } from 'react';
-import { Path, UseFormRegister } from 'react-hook-form';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import styles from './styles.module.scss';
 import { LoginUserDto, RegisterUserDto, UserDto } from '../../models/User/UserDto';
 
-interface Props {
-  name: Path<UserDto | RegisterUserDto | LoginUserDto>;
-  register: UseFormRegister<UserDto | RegisterUserDto | LoginUserDto>;
+interface Props<T extends FieldValues> {
+  name: Path<T>;
+  register: UseFormRegister<T>;
   section: string;
 }
 
-const SectionCheckboxes = ({ section, name, register }: PropsWithChildren<Props>) => {
+function SectionCheckboxes <T extends FieldValues>({ section, name, register }: PropsWithChildren<Props<T>>) {
   return (
     <div className={styles.container}>
       <h2 className={styles.sectionTitle}>{section}:</h2>

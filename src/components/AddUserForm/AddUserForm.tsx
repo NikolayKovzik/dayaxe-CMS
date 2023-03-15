@@ -25,20 +25,20 @@ const AddUserForm = ({ close }: Props) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<UserDto | RegisterUserDto | LoginUserDto>({
+  } = useForm<UserDto>({
     mode: 'all',
     defaultValues,
   });
 
-  const onSubmit: SubmitHandler<UserDto | RegisterUserDto | LoginUserDto> = (data: UserDto | RegisterUserDto | LoginUserDto) => {
-    dispatch(createUser(data as UserDto));
+  const onSubmit: SubmitHandler<UserDto> = (data: UserDto) => {
+    dispatch(createUser(data));
     close();
     reset();
   };
 
   return (
     <div className={styles.formWrapper}>
-      <UserForm onSubmit={handleSubmit(onSubmit)} errors={errors} register={register} />
+      <UserForm<UserDto> onSubmit={handleSubmit(onSubmit)} errors={errors} register={register} />
     </div>
   );
 };

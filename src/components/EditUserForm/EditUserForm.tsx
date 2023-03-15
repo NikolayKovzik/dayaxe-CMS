@@ -23,13 +23,13 @@ const EditUserForm = ({ close, user }: Props) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<UserDto | RegisterUserDto | LoginUserDto>({
+  } = useForm<UserDto>({
     mode: 'all',
     defaultValues,
   });
 
 
-  const onSubmit: SubmitHandler<UserDto | RegisterUserDto | LoginUserDto> = (data: UserDto | RegisterUserDto | LoginUserDto) => {
+  const onSubmit: SubmitHandler<UserDto> = (data: UserDto) => {
     dispatch(updateUser({ id: user._id, ...data } as UserAttributes));
     close();
     reset();
@@ -37,7 +37,7 @@ const EditUserForm = ({ close, user }: Props) => {
 
   return (
     <div className={styles.formWrapper}>
-      <UserForm onSubmit={handleSubmit(onSubmit)} errors={errors} register={register} />
+      <UserForm<UserDto> onSubmit={handleSubmit(onSubmit)} errors={errors} register={register} />
       <svg className={styles.closeButton} onClick={close}>
         <use xlinkHref={`${icons}#cross`} />
       </svg>

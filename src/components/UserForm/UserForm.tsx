@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import styles from './styles.module.scss';
 import { LoginUserDto, Modules, RegisterUserDto, UserDto } from '../../models/User/UserDto';
 import validation from '../../constants/user-validation';
@@ -9,13 +9,13 @@ import Input from '../../UI/Input';
 import Eye from '../../UI/Eye';
 import Button from '../../UI/Button';
 
-interface Props {
+interface Props<T extends FieldValues> {
   onSubmit: () => void;
-  register: UseFormRegister<UserDto | RegisterUserDto | LoginUserDto>;
+  register: UseFormRegister<T>;
   errors: FieldErrors;
 }
 
-const UserForm = ({ onSubmit, register, errors }: Props) => {
+function UserForm<T extends FieldValues> ({ onSubmit, register, errors }: Props<T>){
   const { username, password, email } = validation;
   const { isVisible, toggle } = usePasswordVisibility();
 
@@ -23,7 +23,7 @@ const UserForm = ({ onSubmit, register, errors }: Props) => {
     <SectionCheckboxes
       key={index}
       section={section}
-      name={`access.${section}`}
+      name={`access.${section}` as Path<T>}
       register={register}
     />
   ));
@@ -32,7 +32,7 @@ const UserForm = ({ onSubmit, register, errors }: Props) => {
     <div className={styles.formWrapper}>
       <form className={styles.form}>
         <Input
-          name={'username'}
+          name={'username' as Path<T>}
           label={'Username'}
           register={register}
           options={{
@@ -42,7 +42,7 @@ const UserForm = ({ onSubmit, register, errors }: Props) => {
           errors={errors}
         />
         <Input
-          name={'email'}
+          name={'email' as Path<T>}
           label={'Email'}
           register={register}
           options={{
@@ -52,7 +52,7 @@ const UserForm = ({ onSubmit, register, errors }: Props) => {
           errors={errors}
         />
         <Input
-          name={'password'}
+          name={'password' as Path<T>}
           label={'Password'}
           register={register}
           options={{

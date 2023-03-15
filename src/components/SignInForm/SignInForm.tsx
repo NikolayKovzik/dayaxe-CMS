@@ -21,12 +21,12 @@ const SignInForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<UserDto | RegisterUserDto | LoginUserDto>({
+  } = useForm<LoginUserDto>({
     mode: 'all',
   });
 
-  const onSubmit: SubmitHandler<UserDto | RegisterUserDto | LoginUserDto> = (
-    data: UserDto | RegisterUserDto | LoginUserDto,
+  const onSubmit: SubmitHandler<LoginUserDto> = (
+    data: LoginUserDto,
   ) => {
     dispatch(loginUser(data));
     reset();
@@ -35,7 +35,7 @@ const SignInForm = () => {
   return (
     <div className={styles.formWrapper}>
       <form className={styles.form}>
-        <Input
+        <Input<LoginUserDto>
           name={'email'}
           label={'Email'}
           register={register}
@@ -45,7 +45,7 @@ const SignInForm = () => {
           }}
           errors={errors}
         />
-        <Input
+        <Input<LoginUserDto>
           name={'password'}
           label={'Password'}
           register={register}
