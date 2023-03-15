@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { Route } from 'react-router-dom';
-import { Routes, useLocation, useNavigate } from 'react-router';
+import { Routes, useNavigate } from 'react-router';
 import Layout from './pages/Layout';
 import HomePage from './pages/HomePage';
 import Daycation from './pages/Daycation';
