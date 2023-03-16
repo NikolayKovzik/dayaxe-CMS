@@ -1,1 +1,2 @@
-export { default } from './AddHotelForm';
+import AddHotelForm from './AddHotelForm';
+export default AddHotelForm;

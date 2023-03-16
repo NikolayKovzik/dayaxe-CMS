@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
 import { useAppDispatch } from '../../hooks/redux';
@@ -12,10 +12,11 @@ interface Props {
 }
 
 const AddHotelForm = ({ close }: Props) => {
-  const [image, setImage] = useState('null');
+  const [image, setImage] = useState('');
   const dispatch = useAppDispatch();
 
   const {
+    watch,
     register,
     handleSubmit,
     reset,
@@ -26,15 +27,14 @@ const AddHotelForm = ({ close }: Props) => {
 
   const onSubmit: SubmitHandler<HotelDto> = (data: HotelDto) => {
     const image = data.image[0];
-    console.log(image);
+
     // dispatch();
     close();
     reset();
   };
 
-  const onChangeFile = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files as FileList;
-    const image = file[0];
+  const convertToBase64 = (fileList: FileList) => {
+    const image = fileList[0];
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -45,9 +45,14 @@ const AddHotelForm = ({ close }: Props) => {
     reader.readAsDataURL(image);
   };
 
+  watch('image') && watch('image').length && convertToBase64(watch('image'));
+
   return (
     <div className={styles.formWrapper}>
       <form>
+        <div className={styles.imageWrapper}>
+          {image && <img src={image} alt="image" />}
+        </div>
         <div className={styles.inputWrapper}>
           <label className={styles.label} htmlFor={'image'}>
             Choose image
@@ -59,7 +64,6 @@ const AddHotelForm = ({ close }: Props) => {
             {...register('image', { required: validation.image.required })}
             className={styles.input}
           />
-          {image && <img src={image} alt="image" />}
           <FormError errors={errors} name={'image'} />
         </div>
       </form>

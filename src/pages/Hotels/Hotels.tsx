@@ -3,8 +3,8 @@ import styles from './styles.module.scss';
 import Button from '../../UI/Button';
 import Modal from '../../components/Modal';
 import useModal from '../../hooks/useModal';
-import AddHotelForm from '../../components/AddHotelForm';
 import HotelCards from '../../components/HotelCards';
+import AddHotelForm from '../../components/AddHotelForm';
 
 const Hotels = () => {
   const { isShown, toggle } = useModal();
@@ -16,7 +16,7 @@ const Hotels = () => {
           Add New Hotel
         </Button>
       </div>
-      <Modal isShown={isShown} hide={toggle} modalContent={<AddHotelForm close={toggle} />} />
+      <Modal isShown={isShown} hide={toggle} modalContent={<AddHotelForm close={toggle}/>} />
       <HotelCards />
     </div>
   );
