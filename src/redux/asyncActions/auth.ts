@@ -15,7 +15,6 @@ export const registerUser = createAsyncThunk<AuthResponse, RegisterUserDto, { re
       return rejectWithValue(handleAxiosError(error));
     }
   },
-
 );
 
 export const loginUser = createAsyncThunk<AuthResponse, LoginUserDto, { rejectValue: string }>(

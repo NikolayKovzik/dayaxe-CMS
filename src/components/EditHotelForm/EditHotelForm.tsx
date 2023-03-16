@@ -4,13 +4,16 @@ import styles from './styles.module.scss';
 import { useAppDispatch } from '../../hooks/redux';
 import { HotelDto } from '../../models/Hotels/HotelDto';
 import HotelForm from '../HotelForm';
-import { createHotel } from '../../redux/asyncActions/hotels';
+import { createHotel, updateHotel } from '../../redux/asyncActions/hotels';
+import { Hotel } from '../../models/Hotels/Hotel';
+import icons from '../../assets/icons.svg';
 
 interface Props {
   close: () => void;
+  hotel: Hotel;
 }
 
-const AddHotelForm = ({ close }: Props) => {
+const EditHotelForm = ({ close, hotel }: Props) => {
   const dispatch = useAppDispatch();
 
   const {
@@ -24,7 +27,7 @@ const AddHotelForm = ({ close }: Props) => {
   });
 
   const onSubmit: SubmitHandler<HotelDto> = (data: HotelDto) => {
-    dispatch(createHotel({ image: data.image }));
+    dispatch(updateHotel({ id: hotel._id, image: data.image }));
     close();
     reset();
   };
@@ -37,8 +40,11 @@ const AddHotelForm = ({ close }: Props) => {
         onSubmit={handleSubmit(onSubmit)}
         watch={watch}
       />
+      <svg className={styles.closeButton} onClick={close}>
+        <use xlinkHref={`${icons}#cross`} />
+      </svg>
     </div>
   );
 };
 
-export default AddHotelForm;
+export default EditHotelForm;

@@ -1,28 +1,28 @@
 import React, { useEffect, useMemo } from 'react';
 import styles from './styles.module.scss';
-import UserCard from '../UserCard';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectUsers } from '../../redux/store/selectors';
-import { getAllUsers } from '../../redux/asyncActions/users';
 import Loader from '../../UI/Loader';
+import HotelCard from '../HotelCard';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { selectHotels } from '../../redux/store/selectors';
+import { getAllHotels } from '../../redux/asyncActions/hotels';
 
 const HotelCards = () => {
-  // const { users, loading } = useAppSelector(selectUsers);
+  const { hotels, loading } = useAppSelector(selectHotels);
   const dispatch = useAppDispatch();
 
-  // const userCards = useMemo(
-  //   () => users.map((user) => <UserCard key={user._id} {...user} />),
-  //   [users],
-  // );
+  const hotelsCards = useMemo(
+    () => hotels.map((hotel) => <HotelCard key={hotel._id} {...hotel} />),
+    [hotels],
+  );
 
-  useEffect(() => {
-    // dispatch(getAllUsers());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllHotels());
+  // }, []);
 
   return (
     <>
-      {/*{loading && <Loader />}*/}
-      {/*<ul className={styles.cards}>{userCards}</ul>*/}
+      {loading && <Loader />}
+      <ul className={styles.cards}>{hotelsCards}</ul>
     </>
   );
 };
