@@ -2,7 +2,7 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styles from './styles.module.scss';
 import { useAppDispatch } from '../../hooks/redux';
-import { HotelDto } from '../../models/Hotels/HotelDto';
+import { HotelFormData } from '../../models/Hotels/HotelDto';
 import HotelForm from '../HotelForm';
 import { createHotel } from '../../redux/asyncActions/hotels';
 
@@ -19,19 +19,27 @@ const AddHotelForm = ({ close }: Props) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<HotelDto>({
+  } = useForm<HotelFormData>({
     mode: 'all',
   });
 
-  const onSubmit: SubmitHandler<HotelDto> = (data: HotelDto) => {
-    dispatch(createHotel({ image: data.image }));
+  const onSubmit: SubmitHandler<HotelFormData> = (data: HotelFormData) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const result = String(reader.result);
+      dispatch(createHotel({ image: result }));
+    };
+
+    reader.readAsDataURL(data.image[0]);
+
     close();
     reset();
   };
 
   return (
     <div className={styles.formWrapper}>
-      <HotelForm<HotelDto>
+      <HotelForm<HotelFormData>
         register={register}
         errors={errors}
         onSubmit={handleSubmit(onSubmit)}

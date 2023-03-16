@@ -15,9 +15,9 @@ const HotelCards = () => {
     [hotels],
   );
 
-  // useEffect(() => {
-  //   dispatch(getAllHotels());
-  // }, []);
+  useEffect(() => {
+    dispatch(getAllHotels());
+  }, []);
 
   return (
     <>

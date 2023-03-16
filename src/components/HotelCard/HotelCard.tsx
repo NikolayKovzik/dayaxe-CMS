@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../../UI/Button';
-import EditUserForm from '../EditUserForm';
 import styles from './styles.module.scss';
-import { User } from '../../models/User/User';
 import { useAppDispatch } from '../../hooks/redux';
-import { deleteUser } from '../../redux/asyncActions/users';
 import { Hotel } from '../../models/Hotels/Hotel';
 import { deleteHotel } from '../../redux/asyncActions/hotels';
 import EditHotelForm from '../EditHotelForm';

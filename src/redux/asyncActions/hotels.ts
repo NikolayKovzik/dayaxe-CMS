@@ -1,7 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import AuthService from '../../http/services/AuthService';
-import { LoginUserDto, RegisterUserDto } from '../../models/User/UserDto';
-import { AuthResponse } from '../../models/Auth/authResponse';
 import { handleAxiosError } from '../../utils/handleAxiosErrors';
 import HotelsService from '../../http/services/HotelsService';
 import { Hotel } from '../../models/Hotels/Hotel';

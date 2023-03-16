@@ -1,7 +1,6 @@
 import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Hotel } from '../../models/Hotels/Hotel';
 import { createHotel, deleteHotel, getAllHotels, updateHotel } from '../asyncActions/hotels';
-import image from '../1.png';
 
 interface State {
   hotels: Hotel[];
@@ -11,12 +10,7 @@ interface State {
 }
 
 export const initialState: State = {
-  hotels: [
-    {
-      _id: '321312',
-      image,
-    },
-  ],
+  hotels: [],
   loading: false,
   success: false,
   error: null,
@@ -38,7 +32,14 @@ const onFulfilled = (state: State) => {
 const hotels = createSlice({
   name: 'hotels',
   initialState,
-  reducers: {},
+  reducers: {
+    resetError: (state) => {
+      state.error = null;
+    },
+    resetSuccess: (state) => {
+      state.success = false;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(getAllHotels.pending, (state) => {
       onPending(state);
