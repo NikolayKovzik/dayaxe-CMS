@@ -1,0 +1,68 @@
+@use '../../styles/mixins/breakpoints.scss' as bp;
+@import '../../styles/utils/variables';
+
+.formWrapper {
+  width: 100%;
+  padding: 2.5em 1.5em;
+  background-color: $white;
+  border-radius: 40px 10px 40px 10px;
+  box-shadow: 0 0 16px $shadow;
+
+  @include bp.screen-m {
+    width: 600px;
+    padding: 4.5em 3.5em;
+  }
+}
+
+.imageWrapper {
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.input {
+  position: absolute;
+  z-index: -10;
+  opacity: 0;
+}
+
+.labelButton {
+  width: 100%;
+  border: 1px solid $grey;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 0.5em 0;
+}
+
+.label {
+  padding: 20px 30px;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 24px;
+  border: 2px solid transparent;
+  background: $primary-gradient border-box;
+  color: $white;
+  font-weight: 700;
+  box-shadow: $button-shadow;
+
+  &:hover {
+    border: 2px solid $primary-color;
+    background: transparent;
+    color: $primary-color;
+    box-shadow: none;
+  }
+}

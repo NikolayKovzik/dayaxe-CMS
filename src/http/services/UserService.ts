@@ -23,9 +23,6 @@ export default class UserService {
   }
 
   static async deleteUser(id: string): Promise<AxiosResponse<User>> {
-    console.log('delete');
-    const c = await $authApi.delete<User>(`${usersPath}/${id}`);
-    console.log(c);
-    return c;
+    return  await $authApi.delete<User>(`${usersPath}/${id}`);
   }
 }

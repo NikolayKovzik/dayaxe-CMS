@@ -4,9 +4,6 @@
 .formWrapper {
   position: relative;
   width: 100%;
-
-  @include bp.screen-m {
-  }
 }
 
 .closeButton {
