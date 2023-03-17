@@ -10,9 +10,10 @@ interface Props<T extends FieldValues> {
   label: string;
   isVisible?: boolean;
   errors: FieldErrors;
+  isNumber?: boolean;
 }
 
-function Input<T extends FieldValues> ({
+function Input<T extends FieldValues>({
   name,
   register,
   options = {},
@@ -20,7 +21,20 @@ function Input<T extends FieldValues> ({
   isVisible = true,
   errors,
   children,
+  isNumber,
 }: PropsWithChildren<Props<T>>) {
+  const getInputType = () => {
+    let inputType;
+
+    inputType = isVisible ? 'text' : 'password';
+
+    if (isNumber) {
+      inputType = 'number';
+    }
+
+    return inputType;
+  };
+
   return (
     <div className={styles.inputWrapper}>
       <label className={styles.label} htmlFor={name}>
@@ -29,13 +43,13 @@ function Input<T extends FieldValues> ({
       <input
         id={name}
         {...register(name, options)}
-        type={isVisible ? 'text' : 'password'}
+        type={getInputType()}
         className={styles.input}
       />
       {children}
       <FormError errors={errors} name={name} />
     </div>
   );
-};
+}
 
 export default Input;

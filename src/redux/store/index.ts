@@ -3,11 +3,13 @@ import thunkMiddleware from 'redux-thunk';
 import auth from '../slices/auth';
 import users from '../slices/users';
 import hotels from '../slices/hotels';
+import hotelPasses from '../slices/hotel-passes';
 
 export const rootReducer = combineReducers({
   users,
   auth,
   hotels,
+  hotelPasses,
 });
 
 export const store = configureStore({

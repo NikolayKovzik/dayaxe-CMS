@@ -10,10 +10,17 @@ interface Props<T extends FieldValues> {
   register: UseFormRegister<T>;
   onSubmit: () => void;
   errors: FieldErrors;
+  defaultImage?: string;
 }
 
-function HotelForm<T extends FieldValues>({ onSubmit, register, watch, errors }: Props<T>) {
-  const [image, setImage] = useState('');
+function HotelForm<T extends FieldValues>({
+  onSubmit,
+  register,
+  watch,
+  errors,
+  defaultImage,
+}: Props<T>) {
+  const [image, setImage] = useState(defaultImage || '');
 
   const convertToBase64 = (fileList: FileList) => {
     const image = fileList[0];
