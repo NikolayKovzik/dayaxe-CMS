@@ -2,13 +2,9 @@
 @import '../../styles/utils/variables';
 @import '../../styles/mixins/itemsWidthBetweenGaps.scss';
 
-.addHotelPassButton {
-  width: 100%;
-
-  @include bp.screen-m {
-    width: 50%;
-  }
-  @include bp.screen-l {
-    width: 30%;
-  }
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 35px;
 }

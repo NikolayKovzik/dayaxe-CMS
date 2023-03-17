@@ -1,7 +1,11 @@
 import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createHotel, deleteHotel, getAllHotels, updateHotel } from '../asyncActions/hotels';
 import { HotelPass } from '../../models/HotelPass/HotelPass';
-import { createHotelPass, deleteHotelPass, getAllHotelPasses, updateHotelPass } from '../asyncActions/hotel-passes';
+import {
+  createHotelPass,
+  deleteHotelPass,
+  getAllHotelPasses,
+  updateHotelPass,
+} from '../asyncActions/hotel-passes';
 
 interface State {
   hotelPasses: HotelPass[];
@@ -39,7 +43,7 @@ const hotelPasses = createSlice({
     },
     resetSuccess: (state) => {
       state.success = false;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getAllHotelPasses.pending, (state) => {
