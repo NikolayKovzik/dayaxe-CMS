@@ -1,17 +1,12 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { Route } from 'react-router-dom';
-import { Routes, useNavigate } from 'react-router';
-import Layout from './pages/Layout';
+import { Route, Routes } from 'react-router-dom';
+import ProtectedLayout from './Layouts/ProtectedLayout';
 import HomePage from './pages/HomePage';
-import Daycation from './pages/Daycation';
-import Moments from './pages/Moments';
 import HotelPasses from './pages/HotelPasses';
-import Promotions from './pages/Promotions';
 import Users from './pages/Users';
-import NotFound from './pages/NotFound';
 import './styles/main.scss';
-import RoutesList from './routes';
+import RoutesList from './routes/routes';
 import 'react-toastify/dist/ReactToastify.css';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -21,29 +16,16 @@ import Loader from './UI/Loader';
 import { checkAuth } from './redux/asyncActions/auth';
 import { authActions } from './redux/slices/auth';
 import Hotels from './pages/Hotels';
+import NotFound from './pages/NotFound';
+import AuthLayout from './Layouts/AuthLayout';
 
 const App = () => {
-  const { isAuth, loading, error, success } = useAppSelector(selectAuth);
-  const navigate = useNavigate();
+  const { loading, error, success } = useAppSelector(selectAuth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(checkAuth());
-    if (isAuth) {
-      navigate(RoutesList.DEFAULT);
-    } else {
-      navigate(RoutesList.SIGN_IN);
-    }
   }, []);
-
-  useLayoutEffect(() => {
-    if (isAuth) {
-      navigate(RoutesList.DEFAULT);
-    } else {
-      navigate(RoutesList.SIGN_IN);
-    }
-  }, [isAuth]);
-
 
   useEffect(() => {
     if (success) {
@@ -51,7 +33,7 @@ const App = () => {
         position: toast.POSITION.TOP_RIGHT,
         onOpen: () => {
           dispatch(authActions.resetSuccess());
-        }
+        },
       });
     }
   }, [success]);
@@ -62,7 +44,7 @@ const App = () => {
         position: toast.POSITION.TOP_RIGHT,
         onOpen: () => {
           dispatch(authActions.resetError());
-        }
+        },
       });
     }
   }, [error]);
@@ -75,22 +57,16 @@ const App = () => {
     <>
       <ToastContainer />
       <Routes>
-        {isAuth ? (
-          <Route path={RoutesList.DEFAULT} element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path={RoutesList.USERS} element={<Users />} />
-            <Route path={RoutesList.HOTELS} element={<Hotels />} />
-            <Route path={RoutesList.HOTEL_PASSES} element={<HotelPasses />} />
-            <Route path={RoutesList.DAYCATION} element={<Daycation />} />
-            <Route path={RoutesList.PROMOTIONS} element={<Promotions />} />
-            <Route path={RoutesList.MOMENTS} element={<Moments />} />
-          </Route>
-        ) : (
-          <>
-            <Route path={RoutesList.SIGN_IN} element={<SignIn />} />
-            <Route path={RoutesList.SIGN_UP} element={<SignUp />} />
-          </>
-        )}
+        <Route path={RoutesList.DEFAULT} element={<AuthLayout />}>
+          <Route path={RoutesList.SIGN_IN} element={<SignIn />} />
+          <Route path={RoutesList.SIGN_UP} element={<SignUp />} />
+        </Route>
+        <Route path={RoutesList.DEFAULT} element={<ProtectedLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path={RoutesList.USERS} element={<Users />} />
+          <Route path={RoutesList.HOTELS} element={<Hotels />} />
+          <Route path={RoutesList.HOTEL_PASSES} element={<HotelPasses />} />
+        </Route>
         <Route path={RoutesList.NOT_FOUND} element={<NotFound />} />
       </Routes>
     </>

@@ -9,14 +9,15 @@ import Eye from '../../UI/Eye';
 import Button from '../../UI/Button';
 import { useAppDispatch } from '../../hooks/redux';
 import { registerUser } from '../../redux/asyncActions/auth';
-
+import { useLocation, useNavigate } from 'react-router-dom';
+import RoutesList from '../../routes/routes';
 
 const SignUpForm = () => {
   const { username, password, email } = validation;
   const { isVisible, toggle } = usePasswordVisibility();
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useAppDispatch();
-
 
   const {
     register,
@@ -29,6 +30,8 @@ const SignUpForm = () => {
 
   const onSubmit: SubmitHandler<RegisterUserDto> = (data: RegisterUserDto) => {
     dispatch(registerUser(data));
+    const origin = location.state?.from?.pathname || RoutesList.DEFAULT;
+    navigate(origin, { replace: true });
     reset();
   };
 
