@@ -9,11 +9,14 @@ import Eye from '../../UI/Eye';
 import Button from '../../UI/Button';
 import { useAppDispatch } from '../../hooks/redux';
 import { loginUser } from '../../redux/asyncActions/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
+import RoutesList from '../../routes/routes';
 
 const SignInForm = () => {
   const { password, email } = validation;
   const { isVisible, toggle } = usePasswordVisibility();
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useAppDispatch();
 
   const {
@@ -25,10 +28,10 @@ const SignInForm = () => {
     mode: 'all',
   });
 
-  const onSubmit: SubmitHandler<LoginUserDto> = (
-    data: LoginUserDto,
-  ) => {
+  const onSubmit: SubmitHandler<LoginUserDto> = (data: LoginUserDto) => {
     dispatch(loginUser(data));
+    const origin = location.state?.from?.pathname || RoutesList.DEFAULT;
+    navigate(origin, { replace: true });
     reset();
   };
 

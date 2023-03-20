@@ -1,16 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './styles.module.scss';
+import { Navigate } from 'react-router-dom';
+import RoutesList from '../../routes/routes';
 
 const NotFound = () => {
-  const navigate = useNavigate();
-
-  return (
-    <div className={styles.notFound}>
-      <span>Page Not Found</span>
-      <button onClick={() => navigate(-1)}>Go back</button>
-    </div>
-  );
+  return <Navigate to={RoutesList.DEFAULT} />;
 };
 
 export default NotFound;

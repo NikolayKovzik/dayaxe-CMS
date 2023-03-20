@@ -5,7 +5,7 @@ import { checkAuth, loginUser, registerUser } from '../asyncActions/auth';
 import { localStorageTokenKey } from '../../constants/auth';
 
 interface State {
-  isAuth: boolean;
+  isAuthorized: boolean;
   loading: boolean;
   success: boolean;
   error: string | null;
@@ -13,7 +13,7 @@ interface State {
 }
 
 export const initialState: State = {
-  isAuth: false,
+  isAuthorized: false,
   loading: false,
   success: false,
   error: null,
@@ -29,7 +29,7 @@ const auth = createSlice({
     logout: (state) => {
       localStorage.removeItem(localStorageTokenKey);
       state.user = null;
-      state.isAuth = false;
+      state.isAuthorized = false;
     },
     resetError: (state) => {
       state.error = null;
@@ -48,7 +48,7 @@ const auth = createSlice({
       state.loading = false;
       localStorage.setItem(localStorageTokenKey, action.payload.token);
       state.user = action.payload.user;
-      state.isAuth = true;
+      state.isAuthorized = true;
       state.success = true;
     });
 
@@ -61,7 +61,7 @@ const auth = createSlice({
       state.loading = false;
       localStorage.setItem(localStorageTokenKey, action.payload.token);
       state.user = action.payload.user;
-      state.isAuth = true;
+      state.isAuthorized = true;
       state.success = true;
     });
 
@@ -73,7 +73,7 @@ const auth = createSlice({
       state.loading = false;
       localStorage.setItem(localStorageTokenKey, action.payload.token);
       state.user = action.payload.user;
-      state.isAuth = true;
+      state.isAuthorized = true;
     });
 
     builder.addMatcher(isError, (state, action: PayloadAction<string>) => {

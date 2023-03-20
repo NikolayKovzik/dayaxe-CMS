@@ -1,0 +1,43 @@
+@use '../../styles/mixins/breakpoints' as bp;
+@import '../../styles/utils/variables';
+
+.app {
+  min-height: 100vh;
+  background-color: $secondary-background;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: $primary-gradient;
+}
+
+.main {
+  padding: 15px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @include bp.screen-m {
+    padding: 15px 40px;
+    display: grid;
+    grid-template: 1fr / minmax(20%, auto) 1fr;
+  }
+
+  @include bp.screen-xl {
+    max-width: 1210px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.sidebar {
+  flex-grow: 0;
+}
+
+.content {
+  border-radius: 10px;
+  background-color: $white;
+  padding: 15px;
+  box-shadow: $shadow;
+}

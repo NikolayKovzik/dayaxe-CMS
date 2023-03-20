@@ -1,4 +1,4 @@
-import RoutesList from '../../../../../routes';
+import RoutesList from '../../../../../routes/routes';
 
 export type NavBarProps = {
   items: {

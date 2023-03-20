@@ -1,3 +1,5 @@
+import React from 'react';
+
 enum RoutesList {
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
